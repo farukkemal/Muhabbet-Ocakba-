@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Muhabbet Ocakbaşı | Beylikdüzü Kebap & Steakhouse</title>
+    <meta name="description"
+        content="Beylikdüzü Yakuplu'da en iyi kebap, meze ve rakı deneyimi. Ocakbaşı lezzetleri için Muhabbet Ocakbaşı.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --nav-height: 110px;
+        }
+
+        body {
+            padding-top: var(--nav-height);
+        }
+
+        .navbar {
+            height: var(--nav-height);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.98) !important;
+            padding: 0 !important;
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 15px;
+            width: 100%;
+        }
+
+        .navbar-brand img {
+            max-height: 45px;
+            width: auto;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+            }
+
+            /* Hide long nav on mobile to save space */
+        }
+
+        .lang-switcher {
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            padding: 5px 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #888;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .lang-btn.active {
+            color: var(--gold);
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .hero {
+            min-height: calc(100vh - var(--nav-height));
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="navbar-brand">
+                <img src="images/logo.png" alt="Muhabbet Ocakbaşı">
+            </a>
+
+            <ul class="navbar-nav">
+                <li><a href="menu.html" data-i18n="nav_menu">Menü</a></li>
+                <li><a href="#about" data-i18n="nav_about">Hakkımızda</a></li>
+                <li><a href="#reservation" data-i18n="nav_reservation">Rezervasyon</a></li>
+            </ul>
+
+            <div class="d-md-none">
+                <a href="menu.html" class="btn btn-gold btn-sm" style="font-size: 10px; padding: 5px 10px;">MENÜ</a>
+            </div>
+        </div>
+        <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="tr">TR</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-badge" data-i18n="hero_badge">Beylikdüzü • Yakuplu</span>
+
+            <h1>
+                <span data-i18n="hero_title_1">Ateşin üstünde</span>
+                <span class="gold" data-i18n="hero_title_2">lezzet</span><br>
+                <span data-i18n="hero_title_3">masada</span>
+                <span class="gold" data-i18n="hero_title_4">muhabbet</span>
+            </h1>
+
+            <p class="hero-subtitle" data-i18n="hero_subtitle">
+                Ustadan kebaplar, meze çeşitleri ve seçkin şarap–rakı menüsü. Rezervasyon ve paket servis için bize
+                ulaşın.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="menu.html" class="btn btn-gold">
+                    <i class="bi bi-list-stars"></i>
+                    <span data-i18n="hero_btn_menu">Menümüz</span>
+                </a>
+                <a href="#reservation" class="btn btn-outline">
+                    <i class="bi bi-calendar2-check"></i>
+                    <span data-i18n="hero_btn_reservation">Rezervasyon</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu CTA Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="nav_menu">Menümüz</h2>
+                <p class="text-gray" data-i18n="price_note">Güncel fiyatlar kasada teyit edilir.</p>
+            </div>
+
+            <div style="text-align: center; padding: 2rem 0;">
+                <p style="color: var(--gray-light); font-size: 1.125rem; margin-bottom: 1.5rem;"
+                    data-i18n="hero_subtitle">
+                    Kebap, meze, şarap ve rakı çeşitlerimizi keşfedin.
+                </p>
+                <a href="menu.html" class="btn btn-gold" style="font-size: 1.125rem; padding: 1rem 2.5rem;">
+                    <i class="bi bi-list-stars"></i>
+                    <span data-i18n="hero_btn_menu">Menüyü İncele</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 data-i18n="about_title">Hakkımızda</h2>
+
+                    <p style="margin-bottom: 1rem;" data-i18n="about_text">
+                        Muhabbet Ocakbaşı, lezzetin ateşle buluştuğu, sohbetin sofraya eşlik ettiği özel bir buluşma
+                        noktasıdır. Geleneksel ocakbaşı kültürünü modern dokunuşlarla harmanlayarak misafirlerimize
+                        sadece yemek değil, keyifli bir deneyim sunuyoruz.
+                    </p>
+
+                    <div class="mt-4">
+                        <ul class="contact-list">
+                            <li>
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span data-i18n="address">Skyport Residence, Yakuplu Mah. Hürriyet Blv. No:1, Beylikdüzü
+                                    / İstanbul</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill"></i>
+                                <a href="tel:+905464205909">0546 420 59 09</a>
+                            </li>
+                            <li>
+                                <i class="bi bi-clock-fill"></i>
+                                <span>Her gün 12:00 – 00:00</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-label-overlay" data-i18n="map_label">Muhabbet Ocakbaşı (Skyport Residence Girişi)
+                    </div>
+                    <iframe
+                        src="https://maps.google.com/maps?q=Muhabbet+Ocakbaşı+Skyport+Residence+Beylikdüzü&z=16&output=embed"
+                        style="width: 100%; height: 100%; border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="reviews_title">Misafir Yorumları</h2>
+                <p class="text-gray" data-i18n="reviews_subtitle">Google üzerindeki en beğenilen 5 yıldızlı
+                    yorumlarımız.
+                </p>
+            </div>
+
+            <div class="reviews-container">
+                <button class="slider-arrow prev-arrow" onclick="scrollSlider(-1)">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <div class="reviews-slider" id="reviewsSlider">
+                    <!-- Reviews injected here -->
+                </div>
+                <button class="slider-arrow next-arrow" onclick="scrollSlider(1)">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+                <div class="slider-nav" id="sliderNav">
+                    <!-- Dots injected here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="reservation-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-i18n="reservation_title">Rezervasyon</h2>
+                <p class="text-gray" data-i18n="reservation_subtitle">
+                    Hızlı rezervasyon için WhatsApp'tan yazabilir veya bizi arayabilirsiniz.
+                </p>
+            </div>
+
+            <div class="reservation-grid">
+                <div class="reservation-form">
+                    <h3 class="mb-4"><i class="bi bi-whatsapp"></i> <span data-i18n="reservation_title">WhatsApp
+                            Rezervasyon</span></h3>
+
+                    <form id="reservation-form">
+                        <div class="form-group mb-3">
+                            <label class="form-label" data-i18n="form_name">Ad Soyad</label>
+                            <input type="text" class="form-control" id="res-name" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" data-i18n="form_people">Kişi Sayısı</label>
+                            <select class="form-control" id="res-people">
+                                <option value="2">2 Kişi</option>
+                                <option value="3">3 Kişi</option>
+                                <option value="4">4 Kişi</option>
+                                <option value="5">5 Kişi</option>
+                                <option value="6">6+ Kişi</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" data-i18n="form_date">Tarih</label>
+                            <input type="date" class="form-control" id="res-date" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" data-i18n="form_time">Saat</label>
+                            <input type="time" class="form-control" id="res-time" value="20:00" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" data-i18n="form_occasion">Özel Gün</label>
+                            <select class="form-control" id="res-occasion">
+                                <option value="" data-i18n="occ_none">Seçiniz</option>
+                                <option value="Doğum Günü" data-i18n="occ_birthday">Doğum Günü</option>
+                                <option value="Evlilik Yıldönümü" data-i18n="occ_anniversary">Evlilik Yıldönümü</option>
+                                <option value="İş Yemeği" data-i18n="occ_business">İş Yemeği</option>
+                                <option value="Diğer" data-i18n="occ_other">Diğer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label" data-i18n="form_note">Not (İsteğe bağlı)</label>
+                            <input type="text" class="form-control" id="res-note"
+                                placeholder="Örn. çocuk sandalyesi, doğum günü"
+                                data-i18n-placeholder="form_note_placeholder">
+                        </div>
+
+                        <button type="submit" class="btn btn-gold w-100 py-3">
+                            <i class="bi bi-whatsapp me-2"></i>
+                            <span data-i18n="form_submit">WhatsApp'a Gönder</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="map-container d-none d-md-block">
+                    <div class="map-label-overlay" data-i18n="map_label">Muhabbet Ocakbaşı (Skyport Residence Girişi)
+                    </div>
+                    <iframe
+                        src="https://maps.google.com/maps?q=Muhabbet+Ocakbaşı+Skyport+Residence+Beylikdüzü&z=16&output=embed"
+                        style="width: 100%; height: 100%; border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="footer-brand mb-4">
+                <img src="images/logo.png" alt="Muhabbet Ocakbaşı" style="height: 40px;">
+            </div>
+            <p class="footer-text">
+                © 2024 Muhabbet Ocakbaşı. <span data-i18n="footer_rights">Tüm hakları saklıdır.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- FAB -->
+    <div class="fab-container">
+        <a href="https://wa.me/905421105565" class="fab fab-whatsapp" target="_blank" title="WhatsApp">
+            <i class="bi bi-whatsapp"></i>
+        </a>
+        <a href="tel:+905421105565" class="fab fab-call" title="Hemen Ara">
+            <i class="bi bi-telephone-fill"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="js/menu-data.js"></script>
+    <script src="js/reviews-data.js"></script>
+
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('res-name').value;
+            const people = document.getElementById('res-people').value;
+            const date = document.getElementById('res-date').value;
+            const time = document.getElementById('res-time').value;
+            const occasion = document.getElementById('res-occasion').value;
+            const note = document.getElementById('res-note').value;
+
+            const message = `Merhaba, rezervasyon yapmak istiyorum.%0A%0A` +
+                `Ad: ${name}%0A` +
+                `Kişi: ${people}%0A` +
+                `Tarih: ${date}%0A` +
+                `Saat: ${time}%0A` +
+                (occasion ? `Özel Gün: ${occasion}%0A` : '') +
+                (note ? `Not: ${note}` : '');
+
+            window.open(`https://wa.me/905421105565?text=${message}`, '_blank');
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const dateInput = document.getElementById('res-date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+                dateInput.value = today;
+            }
+
+            renderReviews();
+        });
+
+        let currentReviewIndex = 0;
+        let autoScrollInterval;
+
+        function renderReviews() {
+            const reviews = getReviews();
+            const slider = document.getElementById('reviewsSlider');
+            const nav = document.getElementById('sliderNav');
+
+            if (!slider || reviews.length === 0) return;
+
+            slider.innerHTML = reviews.map(r => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="user-meta">
+                            <span class="review-user">${r.name}</span>
+                            <div class="review-rating">
+                                ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="review-text">${r.text}</p>
+                    <div class="review-footer">
+                        <span class="review-date">${r.date}</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="google-icon">
+                    </div>
+                </div>
+            `).join('');
+
+            const visibleCount = getVisibleCount();
+            const maxIndex = Math.max(0, reviews.length - visibleCount);
+
+            nav.innerHTML = Array.from({ length: maxIndex + 1 }, (_, i) => `
+                <div class="slider-dot ${i === currentReviewIndex ? 'active' : ''}" onclick="jumpToReview(${i})"></div>
+            `).join('');
+
+            checkVisibility();
+
+            // Re-render dots on resize since maxIndex changes
+            window.removeEventListener('resize', checkVisibility);
+            window.addEventListener('resize', () => {
+                checkVisibility();
+                renderReviews();
+            });
+
+            startAutoScroll();
+
+            slider.addEventListener('scroll', () => {
+                const cardWidth = getCardWidth();
+                if (cardWidth === 0) return;
+                const index = Math.round(slider.scrollLeft / cardWidth);
+                if (index !== currentReviewIndex) {
+                    updateDots(index);
+                    currentReviewIndex = index;
+                }
+            });
+        }
+
+        function getVisibleCount() {
+            if (window.innerWidth >= 1200) return 3;
+            if (window.innerWidth >= 768) return 2;
+            return 1;
+        }
+
+        function getCardWidth() {
+            const slider = document.getElementById('reviewsSlider');
+            if (!slider) return 0;
+            const card = slider.querySelector('.review-card');
+            if (!card) return 0;
+            return card.offsetWidth + 24; // width + gap (matching css gap)
+        }
+
+        function checkVisibility() {
+            const reviews = getReviews();
+            const visibleCount = getVisibleCount();
+            const arrows = document.querySelectorAll('.slider-arrow');
+            const nav = document.getElementById('sliderNav');
+            const slider = document.getElementById('reviewsSlider');
+
+            if (reviews.length <= visibleCount) {
+                arrows.forEach(a => a.style.display = 'none');
+                if (nav) nav.style.display = 'none';
+                if (slider) slider.style.justifyContent = 'center';
+                clearInterval(autoScrollInterval);
+            } else {
+                if (window.innerWidth >= 1024) {
+                    arrows.forEach(a => a.style.display = 'flex');
+                } else {
+                    arrows.forEach(a => a.style.display = 'none');
+                }
+                if (nav) nav.style.display = 'flex';
+                if (slider) slider.style.justifyContent = 'flex-start';
+                startAutoScroll();
+            }
+        }
+
+        function startAutoScroll() {
+            const reviews = getReviews();
+            const visibleCount = getVisibleCount();
+            if (reviews.length <= visibleCount) return;
+
+            if (autoScrollInterval) clearInterval(autoScrollInterval);
+            autoScrollInterval = setInterval(() => {
+                scrollSlider(1);
+            }, 5000);
+        }
+
+        function scrollSlider(direction) {
+            const reviews = getReviews();
+            const visibleCount = getVisibleCount();
+            if (reviews.length <= visibleCount) return;
+
+            clearInterval(autoScrollInterval);
+
+            let nextIndex = currentReviewIndex + direction;
+            const maxIndex = reviews.length - visibleCount;
+
+            if (nextIndex > maxIndex) {
+                nextIndex = 0;
+            } else if (nextIndex < 0) {
+                nextIndex = maxIndex;
+            }
+
+            currentReviewIndex = nextIndex;
+            scrollToReview(currentReviewIndex);
+            startAutoScroll();
+        }
+
+        function jumpToReview(index) {
+            const reviews = getReviews();
+            const visibleCount = getVisibleCount();
+            const maxIndex = reviews.length - visibleCount;
+
+            clearInterval(autoScrollInterval);
+            currentReviewIndex = Math.min(index, maxIndex);
+            scrollToReview(currentReviewIndex);
+            startAutoScroll();
+        }
+
+        function scrollToReview(index) {
+            const slider = document.getElementById('reviewsSlider');
+            if (!slider) return;
+
+            const cardWidth = getCardWidth();
+            slider.scrollTo({
+                left: index * cardWidth,
+                behavior: 'smooth'
+            });
+            updateDots(index);
+        }
+
+        function updateDots(index) {
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+/**
+ * Muhabbet Ocakbaşı - Multi-Language Support System
+ * Languages: Turkish (TR), English (EN), Russian (RU), Arabic (AR), German (DE)
+ */
+
+const translations = {
+  tr: {
+    nav_home: "Ana Sayfa",
+    nav_menu: "Menümüz",
+    nav_about: "Hakkımızda",
+    nav_reservation: "Rezervasyon",
+    hero_badge: "Beylikdüzü • Yakuplu",
+    hero_title_1: "Ateşin üstünde",
+    hero_title_2: "lezzet",
+    hero_title_3: "masada",
+    hero_title_4: "muhabbet",
+    hero_subtitle: "Ustadan kebaplar, meze çeşitleri ve seçkin şarap–rakı menüsü. Rezervasyon ve paket servis için bize ulaşın.",
+    hero_btn_menu: "Menümüz",
+    hero_btn_reservation: "Rezervasyon",
+    cat_starters: "Başlangıçlar & Meze",
+    cat_wraps: "Dürümler",
+    cat_oven: "Taş Fırın",
+    cat_pan: "Fırında Tava Çeşitleri",
+    cat_desserts: "Tatlılar",
+    cat_meats: "Etlerimiz",
+    cat_beverages: "Meşrubatlar",
+    cat_beers: "Biralar",
+    cat_whiteWines: "Beyaz Şaraplar",
+    cat_redWines: "Kırmızı Şaraplar",
+    cat_raki: "Rakılar",
+    about_title: "Hakkımızda",
+    about_text: "Muhabbet Ocakbaşı, lezzetin ateşle buluştuğu, sohbetin sofraya eşlik ettiği özel bir buluşma noktasıdır. Geleneksel ocakbaşı kültürünü modern dokunuşlarla harmanlayarak misafirlerimize sadece yemek değil, keyifli bir deneyim sunuyoruz.",
+    reservation_title: "Rezervasyon",
+    reservation_subtitle: "Hızlı rezervasyon için WhatsApp'tan yazabilir veya bizi arayabilirsiniz.",
+    form_name: "Ad Soyad",
+    form_people: "Kişi Sayısı",
+    form_date: "Tarih",
+    form_time: "Saat",
+    form_note: "Not (İsteğe bağlı)",
+    form_note_placeholder: "Örn. çocuk sandalyesi, doğum günü",
+    form_submit: "WhatsApp'a Gönder",
+    footer_rights: "Tüm hakları saklıdır.",
+    price_note: "Güncel fiyatlar kasada teyit edilir.",
+    currency: "₺",
+    tab_food: "🍴 Yiyecekler",
+    tab_drink: "🍹 İçecekler",
+    address: "Skyport Residence, Yakuplu Mah. Hürriyet Blv. No:1, Beylikdüzü / İstanbul",
+    form_occasion: "Özel Gün (Opsiyonel)",
+    occ_none: "Seçiniz",
+    occ_birthday: "Doğum Günü",
+    occ_anniversary: "Evlilik Yıldönümü",
+    occ_business: "İş Yemeği",
+    occ_other: "Özel Gün",
+    map_label: "Muhabbet Ocakbaşı (Skyport Residence Girişi)",
+    reviews_title: "Misafir Yorumları",
+    reviews_subtitle: "Google üzerindeki en beğenilen 5 yıldızlı yorumlarımız."
+  },
+  en: {
+    nav_home: "Home",
+    nav_menu: "Menu",
+    nav_about: "About Us",
+    nav_reservation: "Reservation",
+    hero_badge: "Beylikdüzü • Yakuplu",
+    hero_title_1: "Flavor on",
+    hero_title_2: "fire",
+    hero_title_3: "conversation at",
+    hero_title_4: "the table",
+    hero_subtitle: "Master kebabs, meze varieties and premium wine-raki menu. Contact us for reservations and takeaway.",
+    hero_btn_menu: "Our Menu",
+    hero_btn_reservation: "Reservation",
+    cat_starters: "Appetizers & Meze",
+    cat_wraps: "Wraps",
+    cat_oven: "Stone Oven",
+    cat_pan: "Oven Pan Varieties",
+    cat_desserts: "Desserts",
+    cat_meats: "Our Meats",
+    cat_beverages: "Soft Drinks",
+    cat_beers: "Beers",
+    cat_whiteWines: "White Wines",
+    cat_redWines: "Red Wines",
+    cat_raki: "Raki",
+    about_title: "About Us",
+    about_text: "Muhabbet Ocakbaşı is a special meeting point where flavor meets fire and conversation accompanies the table. We offer a pleasant experience beyond just food by blending traditional grill culture with modern touches.",
+    reservation_title: "Reservation",
+    reservation_subtitle: "Contact us via WhatsApp or call us for a quick reservation.",
+    form_name: "Full Name",
+    form_people: "Number of People",
+    form_date: "Date",
+    form_time: "Time",
+    form_note: "Note (Optional)",
+    form_note_placeholder: "e.g. high chair, birthday",
+    form_submit: "Send to WhatsApp",
+    footer_rights: "All rights reserved.",
+    price_note: "Current prices are confirmed at the register.",
+    currency: "₺",
+    tab_food: "🍴 Food",
+    tab_drink: "🍹 Drinks",
+    address: "Skyport Residence, Yakuplu Mah. Hurriyet Blv. No:1, Beylikduzu / Istanbul",
+    form_occasion: "Special Occasion (Optional)",
+    occ_none: "Select",
+    occ_birthday: "Birthday",
+    occ_anniversary: "Anniversary",
+    occ_business: "Business Meeting",
+    occ_other: "Other",
+    map_label: "Muhabbet Ocakbaşı (Skyport Residence Entrance)",
+    reviews_title: "Guest Reviews",
+    reviews_subtitle: "Our top-rated 5-star reviews on Google."
+  },
+  ru: {
+    nav_home: "Главная",
+    nav_menu: "Меню",
+    nav_about: "О нас",
+    nav_reservation: "Бронирование",
+    hero_badge: "Бейликдюзю • Якуплу",
+    hero_title_1: "Вкус на",
+    hero_title_2: "огне",
+    hero_title_3: "беседа за",
+    hero_title_4: "столом",
+    hero_subtitle: "Кебабы от мастера, ассортимент мезе и элитное меню вин и раки. Свяжитесь с нами для бронирования.",
+    hero_btn_menu: "Наше меню",
+    hero_btn_reservation: "Бронирование",
+    cat_starters: "Закуски и Мезе",
+    cat_wraps: "Дюрюм",
+    cat_oven: "Каменная печь",
+    cat_pan: "Блюда на сковороде",
+    cat_desserts: "Десерты",
+    cat_meats: "Мясные блюда",
+    cat_beverages: "Напитки",
+    cat_beers: "Пиво",
+    cat_whiteWines: "Белые вина",
+    cat_redWines: "Красные вина",
+    cat_raki: "Ракы",
+    about_title: "О нас",
+    about_text: "Muhabbet Ocakbaşı — это место, где вкус встречается с огнем, а беседа дополняет трапезу. Мы объединяем традиции с современностью для вашего отдыха.",
+    reservation_title: "Бронирование",
+    reservation_subtitle: "Пишите в WhatsApp или звоните для быстрого бронирования.",
+    form_name: "Имя Фамилия",
+    form_people: "Количество человек",
+    form_date: "Дата",
+    form_time: "Время",
+    form_note: "Примечание",
+    form_note_placeholder: "напр. детский стул, день рождения",
+    form_submit: "Отправить в WhatsApp",
+    footer_rights: "Все права защищены.",
+    price_note: "Актуальные цены уточняются на кассе.",
+    currency: "₺",
+    tab_food: "🍴 Еда",
+    tab_drink: "🍹 Напитки",
+    form_occasion: "Особый случай",
+    occ_none: "Выберите",
+    occ_birthday: "День рождения",
+    occ_anniversary: "Годовщина",
+    occ_business: "Деловая встреча",
+    occ_other: "Другое",
+    map_label: "Muhabbet Ocakbaşı (Вход в Skyport Residence)",
+    reviews_title: "Отзывы гостей",
+    reviews_subtitle: "Наши лучшие 5-звездочные отзывы в Google."
+  },
+  ar: {
+    nav_home: "الرئيسية",
+    nav_menu: "القائمة",
+    nav_about: "من نحن",
+    nav_reservation: "الحجز",
+    hero_badge: "بيليكدوزو • ياكوبلو",
+    hero_title_1: "النكهة فوق",
+    hero_title_2: "النار",
+    hero_title_3: "والحديث حول",
+    hero_title_4: "المائدة",
+    hero_subtitle: "كباب من يد الأستاذ، تشكيلة مقبلات وقائمة فاخرة من النبيذ والعرق. تواصل معنا للحجز.",
+    hero_btn_menu: "قائمتنا",
+    hero_btn_reservation: "الحجز",
+    cat_starters: "المقبلات والمزة",
+    cat_wraps: "سندويشات",
+    cat_oven: "فرن حجري",
+    cat_pan: "أطباق المقلاة",
+    cat_desserts: "الحلويات",
+    cat_meats: "لحومنا",
+    cat_beverages: "مشروبات باردة",
+    cat_beers: "بيرة",
+    cat_whiteWines: "نبيذ أبيض",
+    cat_redWines: "نبيذ أحمر",
+    cat_raki: "راكي",
+    about_title: "من نحن",
+    about_text: "محبة أوجاكباشي هي نقطة التقاء خاصة حيث تلتقي النكهة بالنار وتصاحب المحادثة المائدة. نحن نمزج الثقافة التقليدية بلمسات حديثة.",
+    reservation_title: "الحجز",
+    reservation_subtitle: "للحجز السريع، تواصل معنا عبر واتساب أو اتصل بنا.",
+    form_name: "الاسم الكامل",
+    form_people: "عدد الأشخاص",
+    form_date: "التاريخ",
+    form_time: "الوقت",
+    form_note: "ملاحظة (اختياري)",
+    form_note_placeholder: "مثال: كرسي أطفال، عيد ميلاد",
+    form_submit: "إرسال عبر واتساب",
+    footer_rights: "جميع الحقوق محفوظة.",
+    price_note: "يتم تأكيد الأسعار عند الكاونتر.",
+    currency: "₺",
+    tab_food: "🍴 الطعام",
+    tab_drink: "🍹 المشروبات",
+    form_occasion: "مناسبة خاصة (اختياري)",
+    occ_none: "اختر",
+    occ_birthday: "عيد ميلاد",
+    occ_anniversary: "ذكرى زواج",
+    occ_business: "اجتماع عمل",
+    occ_other: "أخرى",
+    map_label: "Muhabbet Ocakbaşı (مدخل سكاي بورت ريزيدنس)",
+    reviews_title: "آراء الضيوف",
+    reviews_subtitle: "أفضل تقييماتنا ذات الـ 5 نجوم على جوجل."
+  },
+  de: {
+    nav_home: "Startseite",
+    nav_menu: "Speisekarte",
+    nav_about: "Über uns",
+    nav_reservation: "Reservierung",
+    hero_badge: "Beylikdüzü • Yakuplu",
+    hero_title_1: "Geschmack auf",
+    hero_title_2: "Feuer",
+    hero_title_3: "Gespräch am",
+    hero_title_4: "Tisch",
+    hero_subtitle: "Meisterhafte Kebabs, Meze-Variationen und erstklassiges Wein-Raki-Menü. Kontaktieren Sie uns für Reservierungen.",
+    hero_btn_menu: "Speisekarte",
+    hero_btn_reservation: "Reservierung",
+    cat_starters: "Vorspeisen & Meze",
+    cat_wraps: "Wraps",
+    cat_oven: "Steinofen",
+    cat_pan: "Pfannengerichte",
+    cat_desserts: "Desserts",
+    cat_meats: "Unser Fleisch",
+    cat_beverages: "Erfrischungsgetränke",
+    cat_beers: "Biere",
+    cat_whiteWines: "Weißweine",
+    cat_redWines: "Rotweine",
+    cat_raki: "Raki",
+    about_title: "Über uns",
+    about_text: "Muhabbet Ocakbaşı ist ein besonderer Treffpunkt, an dem Geschmack auf Feuer trifft und Gespräche den Tisch begleiten. Wir verbinden Tradition mit modernen Akzenten.",
+    reservation_title: "Reservierung",
+    reservation_subtitle: "Schreiben Sie uns per WhatsApp oder rufen Sie uns an für eine schnelle Reservierung.",
+    form_name: "Vor- und Nachname",
+    form_people: "Anzahl Personen",
+    form_date: "Datum",
+    form_time: "Uhrzeit",
+    form_note: "Notiz (Optional)",
+    form_note_placeholder: "z.B. Kinderstuhl, Geburtstag",
+    form_submit: "Per WhatsApp senden",
+    footer_rights: "Alle Rechte vorbehalten.",
+    price_note: "Aktuelle Preise werden an der Kasse bestätigt.",
+    currency: "₺",
+    tab_food: "🍴 Speisen",
+    tab_drink: "🍹 Getränke",
+    form_occasion: "Besonderer Anlass",
+    occ_none: "Wählen",
+    occ_birthday: "Geburtstag",
+    occ_anniversary: "Jahrestag",
+    occ_business: "Geschäfttreffen",
+    occ_other: "Anderes",
+    map_label: "Muhabbet Ocakbaşı (Eingang Skyport Residence)",
+    reviews_title: "Gästebewertungen",
+    reviews_subtitle: "Unsere am besten bewerteten 5-Sterne-Bewertungen bei Google."
+  }
+};
+
+let currentLang = localStorage.getItem('muhabbetLang') || 'tr';
+
+function t(key) {
+  return translations[currentLang]?.[key] || translations['tr'][key] || key;
+}
+
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+
+  currentLang = lang;
+  localStorage.setItem('muhabbetLang', lang);
+
+  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    el.placeholder = t(key);
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
+}
+
+function initI18n() {
+  setLanguage(currentLang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initI18n);
