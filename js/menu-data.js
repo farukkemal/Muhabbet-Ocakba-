@@ -331,11 +331,11 @@ const menuData = {
         name: { tr: "Biralar", en: "Beers", ru: "Пиво", ar: "بيرة", de: "Biere" },
         icon: "🍺",
         items: [
-            { name: { tr: "Efes 33cl", en: "Efes 33cl", ru: "Эфес 33cl", ar: "إيفس 33cl", de: "Efes 33cl" }, price: 240 },
+            { name: { tr: "Efes 33cl", en: "Efes 33cl", ru: "Эфес 33cl", ar: "إيفس 33cl", de: "Efes 33cl" }, price: 250 },
             { name: { tr: "Efes Malt 50cl", en: "Efes Malt 50cl", ru: "Эфес Молт 50cl", ar: "إيفس مالت 50cl", de: "Efes Malt 50cl" }, price: 250 },
-            { name: { tr: "Bomonti 33cl", en: "Bomonti 33cl", ru: "Бомонти 33cl", ar: "بومونتي 33cl", de: "Bomonti 33cl" }, price: 240 },
+            { name: { tr: "Bomonti 33cl", en: "Bomonti 33cl", ru: "Бомонти 33cl", ar: "بومونتي 33cl", de: "Bomonti 33cl" }, price: 250 },
             { name: { tr: "Bomonti Filtresiz 50cl", en: "Bomonti Unfiltered 50cl", ru: "Бомонти Нефильтр. 50cl", ar: "بومونتي غير مفلتر 50cl", de: "Bomonti Unfiltr. 50cl" }, price: 280 },
-            { name: { tr: "Miller", en: "Miller", ru: "Миллер", ar: "ميلر", de: "Miller" }, price: 220 }
+            { name: { tr: "Miller", en: "Miller", ru: "Миллер", ar: "ميلر", de: "Miller" }, price: 250 }
         ]
     },
     wines: {
@@ -399,7 +399,10 @@ const menuData = {
 
 function getCurrentLang() { return localStorage.getItem('muhabbetLang') || DEFAULT_LANG; }
 function t_obj(obj) { if (!obj) return ''; if (typeof obj === 'string') return obj; const lang = getCurrentLang(); return obj[lang] || obj[DEFAULT_LANG] || ''; }
-function getMenuData() { return menuData; }
+function getMenuData() {
+    const stored = localStorage.getItem('muhabbetMenu');
+    return stored ? JSON.parse(stored) : menuData;
+}
 function saveMenuData(data) { localStorage.setItem('muhabbetMenu', JSON.stringify(data)); }
 function resetMenuData() { localStorage.removeItem('muhabbetMenu'); return menuData; }
 const AIDescriptionProvider = { generate: function (itemName, lang = 'tr') { const d = { tr: "Usta ellerden çıkan, taze malzemelerle hazırlanan eşsiz bir lezzet deneyimi.", en: "A unique flavor experience prepared by master hands with fresh ingredients.", ru: "Уникальный вкус, приготовленный из свежих ингредиентов.", ar: "تجربة نكهة فريدة من نوعها أعدها أساتذة بمكونات طازجة.", de: "Ein einzigartiges Geschmackserlebnis, frisch von Meisterhand zubereitet." }; return d[lang]; } };

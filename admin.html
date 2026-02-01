@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Bootstrap 5 -->
@@ -20,462 +20,472 @@
 
     <style>
         :root {
-            --black: #000000;
-            --black-card: #141414;
+            --bg-dark: #121212;
+            --bg-card: #1E1E1E;
+            --bg-input: #2D2D2D;
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0A0;
             --gold: #FFD700;
-            --gold-dark: #B8860B;
-            --white: #FFFFFF;
-            --gray: #888;
-            --fire-red: #D32F2F;
-            --whatsapp: #25D366;
-            --glass-bg: rgba(20, 20, 20, 0.8);
-            --glass-border: rgba(255, 215, 0, 0.2);
+            --gold-hover: #E6C200;
+            --danger: #CF6679;
+            --success: #03DAC6;
+            --border-color: #333333;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--black);
-            color: var(--white);
-            line-height: 1.5;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
         }
 
-        /* Navbar */
-        .admin-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--glass-border);
+        /* Login Screen */
+        .login-wrapper {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #2a2a2a 0%, #121212 100%);
         }
 
-        .nav-content {
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navbar */
+        .admin-navbar {
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo img {
+            height: 32px;
+        }
+
+        /* Main Content */
+        .admin-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navigation Tabs */
+        .nav-pills .nav-link {
+            color: var(--text-muted);
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-pills .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        .nav-pills .nav-link.active {
+            background: var(--gold);
+            color: #000;
+            font-weight: 600;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--gold);
-        }
-
-        .nav-brand h1 {
-            font-size: 18px;
+        .section-title {
+            font-weight: 700;
+            font-size: 1.1rem;
             margin: 0;
-            font-weight: 700;
-        }
-
-        /* Main Context */
-        .admin-main {
-            padding: 100px 16px 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .stat-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-left: 4px solid var(--gold);
-            padding: 24px;
-            border-radius: 16px;
             display: flex;
             align-items: center;
-            gap: 20px;
-        }
-
-        .stat-icon {
-            width: 54px;
-            height: 54px;
-            background: rgba(255, 215, 0, 0.1);
-            color: var(--gold);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        /* Tabbed Content */
-        .nav-tabs {
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .nav-tabs .nav-link {
-            color: var(--gray);
-            border: none;
-            font-weight: 600;
-            padding: 12px 20px;
-        }
-
-        .nav-tabs .nav-link.active {
-            color: var(--gold);
-            background: transparent;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .nav-tabs .nav-link:hover {
-            color: var(--white);
-            border: none;
-        }
-
-        /* Category Card */
-        .cat-card {
-            background: var(--black-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .cat-card-header {
-            display: flex;
-            align-items: center;
-            padding: 18px 24px;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .cat-title {
-            flex: 1;
-            font-weight: 700;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            gap: 0.5rem;
         }
 
         /* Product List */
-        .product-list {
-            padding: 20px;
+        .item-list {
+            padding: 0.5rem;
         }
 
-        .product-row {
+        .item-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            transition: all 0.2s;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .product-row:hover {
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .item-row:hover {
             background: rgba(255, 255, 255, 0.05);
         }
 
-        .product-info {
-            flex: 1;
-        }
-
-        .product-name {
+        .item-name {
             font-weight: 600;
             display: block;
         }
 
-        .product-desc {
-            font-size: 12px;
-            color: var(--gray);
-            display: block;
+        .item-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 400px;
+            max-width: 300px;
+            display: block;
         }
 
-        .product-price {
-            font-weight: 800;
+        .item-price {
+            font-weight: 700;
             color: var(--gold);
+            font-size: 1.1rem;
             min-width: 80px;
             text-align: right;
         }
 
-        /* Buttons */
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            border: none;
-            color: black;
+        /* Subcategory Divider */
+        .subcat-divider {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
             font-weight: 700;
-            border-radius: 10px;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .btn-outline-gold {
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            background: transparent;
-            font-weight: 600;
-        }
-
-        .btn-fire {
-            background: var(--fire-red);
-            border: none;
-            color: white;
-        }
-
-        /* Multilingual Editor Modal */
-        .lang-tabs {
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .lang-tab {
-            padding: 6px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Forms */
+        .form-control,
+        .form-select {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
             border-radius: 8px;
-            background: transparent;
-            color: var(--gray);
-            font-size: 12px;
-            font-weight: 700;
+            padding: 0.75rem;
         }
 
-        .lang-tab.active {
-            background: var(--gold);
-            color: black;
+        .form-control:focus,
+        .form-select:focus {
+            background-color: var(--bg-input);
             border-color: var(--gold);
+            color: var(--text-main);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
         }
 
         .form-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--gray);
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 6px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .form-control {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 10px;
-            padding: 10px 14px;
+        /* Buttons */
+        .btn-gold {
+            background-color: var(--gold);
+            color: #000;
+            font-weight: 600;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            transition: all 0.2s;
         }
 
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--gold);
-            color: white;
-            box-shadow: none;
+        .btn-gold:hover {
+            background-color: var(--gold-hover);
+            transform: translateY(-1px);
         }
 
-        /* Login Screen */
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: var(--black-card);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 24px;
-            width: 100%;
-            max-width: 420px;
-        }
-
-        .toast-container {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 2000;
-        }
-
-        .toast {
-            background: var(--black-card);
+        .btn-outline-gold {
+            background: transparent;
             border: 1px solid var(--gold);
-            color: white;
-            border-radius: 12px;
+            color: var(--gold);
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .btn-outline-gold:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+        }
+
+        .btn-danger-soft {
+            background: rgba(207, 102, 121, 0.1);
+            color: var(--danger);
+            border: 1px solid transparent;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .btn-danger-soft:hover {
+            background: rgba(207, 102, 121, 0.2);
+            border-color: var(--danger);
+        }
+
+        /* Modal */
+        .modal-content {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .modal-header,
+        .modal-footer {
+            border-color: var(--border-color);
+        }
+
+        .btn-close-white {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        /* Language Tabs inside Modal */
+        .lang-tabs {
+            background: var(--bg-input);
+            padding: 4px;
+            border-radius: 8px;
+            display: flex;
+            gap: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .lang-tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .lang-tab-btn.active {
+            background: var(--bg-card);
+            color: var(--gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Toast */
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--gold);
+            color: var(--text-main);
         }
     </style>
 </head>
 
 <body>
+
     <!-- Login Screen -->
-    <div id="loginScreen" class="login-container">
-        <div class="login-card">
-            <div class="text-center mb-4">
-                <img src="images/logo.png" alt="Muhabbet" style="height: 60px;">
-            </div>
-            <h2 class="text-center mb-4" style="color: var(--gold); font-family: 'Playfair Display';">Yönetim Girişi
-            </h2>
+    <div id="loginScreen" class="login-wrapper">
+        <div class="login-card text-center">
+            <img src="images/logo.png" alt="Logo" style="height: 60px; margin-bottom: 1.5rem;">
+            <h2 class="mb-4" style="font-family: 'Playfair Display'; color: var(--gold);">Yönetici Girişi</h2>
             <form id="loginForm">
                 <div class="mb-4">
-                    <label class="form-label">ŞİFRE</label>
-                    <input type="password" class="form-control text-center" id="passwordInput" placeholder="••••••••"
-                        required>
+                    <input type="password" class="form-control text-center fs-5" id="passwordInput"
+                        placeholder="Şifrenizi Girin" required>
                 </div>
-                <button type="submit" class="btn btn-gold w-100 py-3">GİRİŞ YAP</button>
+                <button type="submit" class="btn btn-gold w-100 py-3">Giriş Yap</button>
             </form>
         </div>
     </div>
 
     <!-- Admin Panel -->
     <div id="adminPanel" style="display: none;">
-        <nav class="admin-nav">
-            <div class="nav-content">
-                <a href="admin.html" class="nav-brand">
-                    <img src="images/logo.png" alt="Logo" style="height: 32px;">
-                    <h1>PANEL CMS</h1>
+        <nav class="admin-navbar">
+            <div class="container-fluid max-width-1200 d-flex justify-content-between align-items-center px-4">
+                <a href="#" class="brand-logo">
+                    <img src="images/logo.png" alt="Logo">
+                    <span>Admin Panel</span>
                 </a>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-success btn-sm px-3" onclick="saveChanges()">
-                        <i class="bi bi-cloud-check"></i> <span class="d-none d-sm-inline">KAYDET</span>
-                    </button>
-                    <a href="menu.html" target="_blank" class="btn btn-outline-gold btn-sm">
-                        <i class="bi bi-eye"></i> <span class="d-none d-sm-inline">SİTE</span>
+                    <a href="menu.html" target="_blank"
+                        class="btn btn-outline-gold btn-sm d-flex align-items-center gap-2">
+                        <i class="bi bi-box-arrow-up-right"></i> <span class="d-none d-sm-inline">Siteyi Gör</span>
                     </a>
-                    <button class="btn btn-fire btn-sm" onclick="logout()">
-                        <i class="bi bi-box-arrow-right"></i>
+                    <button onclick="saveChanges()" class="btn btn-gold btn-sm d-flex align-items-center gap-2">
+                        <i class="bi bi-cloud-check-fill"></i> <span class="d-none d-sm-inline">Kaydet</span>
+                    </button>
+                    <button onclick="logout()" class="btn btn-danger-soft btn-sm ms-2">
+                        <i class="bi bi-power"></i>
                     </button>
                 </div>
             </div>
         </nav>
 
-        <main class="admin-main">
+        <main class="admin-container">
             <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="bi bi-grid-3x3-gap"></i></div>
-                    <div class="stat-info">
-                        <div class="num" id="statItems">0</div>
-                        <div class="label">ÜRÜN</div>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-value" id="statProducts">0</div>
+                            <div class="stat-label">TOPLAM ÜRÜN</div>
+                        </div>
+                        <i class="bi bi-grid-3x3-gap stat-icon"></i>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="bi bi-translate"></i></div>
-                    <div class="stat-info">
-                        <div class="num">5</div>
-                        <div class="label">DİL DESTEĞİ</div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-value" id="statCats">0</div>
+                            <div class="stat-label">KATEGORİ</div>
+                        </div>
+                        <i class="bi bi-tags stat-icon"></i>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="bi bi-tags"></i></div>
-                    <div class="stat-info">
-                        <div class="num" id="statCats">0</div>
-                        <div class="label">KATEGORİ</div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">AKTİF DİL</div>
+                        </div>
+                        <i class="bi bi-translate stat-icon"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Tabs -->
-            <ul class="nav nav-tabs mb-4">
+            <ul class="nav nav-pills mb-4" id="mainTab" role="tablist">
                 <li class="nav-item">
-                    <button class="nav-link active" onclick="switchSection('menu')">Ürün Yönetimi</button>
+                    <button class="nav-link active" onclick="switchTab('menu')" id="tab-menu-btn">
+                        <i class="bi bi-cup-straw me-2"></i> Menü & Ürünler
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link" onclick="switchSection('content')">Site Metinleri</button>
+                    <button class="nav-link" onclick="switchTab('content')" id="tab-content-btn">
+                        <i class="bi bi-file-text me-2"></i> Site İçerikleri
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link" id="tabReviews" onclick="switchSection('reviews')">Yorum Yönetimi</button>
+                    <button class="nav-link" onclick="switchTab('reviews')" id="tab-reviews-btn">
+                        <i class="bi bi-chat-quote me-2"></i> Yorumlar
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <button class="nav-link text-warning" onclick="resetToDefaults()"><i
-                            class="bi bi-arrow-clockwise"></i> Sıfırla</button>
+                <li class="nav-item ms-auto">
+                    <button class="nav-link text-danger" onclick="resetToDefaults()">
+                        <i class="bi bi-arrow-counterclockwise me-2"></i> Sıfırla
+                    </button>
                 </li>
             </ul>
 
-            <!-- Sections -->
-            <div id="sectionMenu">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="m-0" style="color:var(--gold)">Menü İçeriği</h3>
-                    <button class="btn btn-gold btn-sm px-4" onclick="showCategoryModal()">
+            <!-- Content Area -->
+            <div id="tab-menu" class="tab-pane fade show active">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="m-0 text-white">Kategoriler</h4>
+                    <button class="btn btn-outline-gold btn-sm" onclick="openCategoryModal()">
                         <i class="bi bi-plus-lg"></i> Yeni Kategori
                     </button>
                 </div>
-                <div id="menuCategoryList"></div>
+                <div id="menuContainer"></div>
             </div>
 
-            <div id="sectionContent" style="display: none;">
-                <h3 class="mb-4" style="color:var(--gold)">Site Metinlerini Düzenle</h3>
-                <div class="alert alert-info bg-dark border-secondary text-light small">
-                    <i class="bi bi-info-circle me-2"></i> Bu bölümdeki metinler "Hakkımızda" ve Ana Sayfadaki sabit
-                    alanları yönetir.
-                </div>
-                <!-- CMS Static Content Interface here... -->
-                <div id="staticContentEditor" class="cat-card p-4">
-                    <p class="text-muted">Yükleniyor...</p>
+            <div id="tab-content" class="tab-pane fade" style="display:none;">
+                <div class="section-card p-4">
+                    <h4 class="mb-4 text-white">Çok Dilli Site Metinleri</h4>
+                    <div class="alert alert-info bg-dark border-secondary text-light small mb-4">
+                        <i class="bi bi-info-circle me-2"></i> Burada yaptığınız değişiklikler "Hakkımızda", "Ana Sayfa"
+                        ve "İletişim" bölümlerini günceller.
+                    </div>
+                    <div id="staticContentEditor"></div>
                 </div>
             </div>
 
-            <div id="sectionReviews" style="display: none;">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="m-0" style="color:var(--gold)">Müşteri Yorumları</h3>
-                    <button class="btn btn-gold btn-sm px-4" onclick="showReviewModal()">
-                        <i class="bi bi-plus-lg"></i> Yeni Yorum Ekle
+            <div id="tab-reviews" class="tab-pane fade" style="display:none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="m-0 text-white">Müşteri Yorumları</h4>
+                    <button class="btn btn-gold btn-sm" onclick="openReviewModal()">
+                        <i class="bi bi-plus-lg"></i> Yorum Ekle
                     </button>
                 </div>
-                <div class="alert alert-warning bg-dark border-warning text-warning small">
-                    <i class="bi bi-star-fill me-2"></i> Kural Gereği: Sadece 5 yıldızlı yorumlar sisteme kabul edilir.
-                </div>
-                <div id="adminReviewList"></div>
+                <div id="reviewsContainer" class="section-card p-2"></div>
             </div>
+
         </main>
     </div>
 
     <!-- Modals -->
-    <!-- Product Modal -->
-    <div class="modal fade" id="productModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ürün Düzenle</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="lang-tabs d-flex">
-                        <button class="lang-tab active" data-lang="tr">TR</button>
-                        <button class="lang-tab" data-lang="en">EN</button>
-                        <button class="lang-tab" data-lang="ru">RU</button>
-                        <button class="lang-tab" data-lang="ar">AR</button>
-                        <button class="lang-tab" data-lang="de">DE</button>
-                        <button class="btn btn-outline-info btn-sm ms-auto" onclick="autoTranslateProduct()"
-                            title="AI ile TR'den Çevir">
-                            <i class="bi bi-stars"></i>
-                        </button>
-                    </div>
-
-                    <div id="productForms">
-                        <!-- Repeated for each language -->
-                    </div>
-
-                    <div class="mt-3">
-                        <label class="form-label">FİYAT (₺)</label>
-                        <input type="number" class="form-control" id="prodPrice" placeholder="0">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-fire" id="prodDeleteBtn" style="display:none">SİL</button>
-                    <button class="btn btn-gold px-4" onclick="saveProduct()">DEĞİŞİKLİKLERİ UYGULA</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Category Modal -->
     <div class="modal fade" id="categoryModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -485,440 +495,558 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="lang-tabs d-flex">
-                        <button class="lang-tab active" data-lang="tr">TR</button>
-                        <button class="lang-tab" data-lang="en">EN</button>
-                        <button class="lang-tab" data-lang="ru">RU</button>
-                        <button class="lang-tab" data-lang="ar">AR</button>
-                        <button class="lang-tab" data-lang="de">DE</button>
+                    <div class="lang-tabs" id="catLangTabs">
+                        <button class="lang-tab-btn active" onclick="setModalLang('cat', 'tr')">TR</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('cat', 'en')">EN</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('cat', 'ru')">RU</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('cat', 'ar')">AR</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('cat', 'de')">DE</button>
                     </div>
-                    <div id="categoryForms"></div>
-                    <div class="row g-3 mt-2">
+
+                    <div id="catNameInputs"></div>
+
+                    <div class="row g-3 mt-1">
                         <div class="col-6">
-                            <label class="form-label">İkon (Emoji)</label>
+                            <label class="form-label">Simge (Emoji)</label>
                             <input type="text" class="form-control" id="catIcon" placeholder="🍽️">
                         </div>
                         <div class="col-6">
-                            <label class="form-label">BÖLÜM</label>
-                            <select class="form-control" id="catSection">
-                                <option value="food">🍴 Yiyecekler</option>
-                                <option value="drink">🍹 İçecekler</option>
+                            <label class="form-label">Bölüm</label>
+                            <select class="form-select" id="catSection">
+                                <option value="food">Yiyecek</option>
+                                <option value="drink">İçecek</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-gold w-100" onclick="saveCategory()">KATEGORİYİ KAYDET</button>
+                    <button class="btn btn-danger-soft me-auto" id="btnDeleteCat" style="display:none"
+                        onclick="deleteCategory()">Sil</button>
+                    <button class="btn btn-gold" onclick="saveCategory()">Kaydet</button>
                 </div>
             </div>
         </div>
-        <!-- Review Modal -->
-        <div class="modal fade" id="reviewModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Yeni Yorum Ekle</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ürün Düzenle</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="lang-tabs" id="prodLangTabs">
+                        <button class="lang-tab-btn active" onclick="setModalLang('prod', 'tr')">TR</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('prod', 'en')">EN</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('prod', 'ru')">RU</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('prod', 'ar')">AR</button>
+                        <button class="lang-tab-btn" onclick="setModalLang('prod', 'de')">DE</button>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Müşteri Adı</label>
-                            <input type="text" class="form-control" id="revName" placeholder="Örn: Ahmet Y.">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Yorum Metni</label>
-                            <textarea class="form-control" id="revText" rows="4"
-                                placeholder="Müşterinin yorumunu buraya yapıştırın..."></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tarih İfadesi</label>
-                            <input type="text" class="form-control" id="revDate" placeholder="Örn: 1 hafta önce">
-                        </div>
+
+                    <div id="prodInputs">
+                        <!-- Dynamic Inputs -->
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-gold w-100" onclick="addNewReview()">YORUMU EKLE</button>
+
+                    <div class="mt-3">
+                        <label class="form-label">Fiyat (₺)</label>
+                        <input type="number" class="form-control fs-5 fw-bold text-warning" id="prodPrice"
+                            placeholder="0">
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-info me-auto btn-sm" onclick="autoFillTranslations()">
+                        <i class="bi bi-stars"></i> AI Çeviri
+                    </button>
+                    <button class="btn btn-danger-soft" id="btnDeleteProd" style="display:none"
+                        onclick="deleteProduct()">Sil</button>
+                    <button class="btn btn-gold" onclick="saveProduct()">Kaydet</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Toast -->
-        <div class="toast-container">
-            <div id="toast" class="toast hide">
-                <div class="toast-body" id="toastMsg"></div>
+    <!-- Review Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Yorum Ekle</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Ad Soyad</label>
+                        <input type="text" class="form-control" id="revName">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Yorum</label>
+                        <textarea class="form-control" id="revText" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tarih</label>
+                        <input type="text" class="form-control" id="revDate" placeholder="Örn: 2 gün önce">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-gold w-100" onclick="saveReview()">Ekle</button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/menu-data.js"></script>
-        <script src="js/reviews-data.js"></script>
-        <script src="js/i18n.js"></script>
+    <!-- Toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">Default Message</div>
+                <button type="button" class="btn-close me-2 m-auto btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
 
-        <script src="js/auth-config.js"></script>
-        <script>
-            let currentMenu = null;
-            let pModal, cModal;
-            let editingProduct = null; // {catKey, index}
-            let editingCategory = null; // catKey
-            let activeLangTab = 'tr';
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/menu-data.js"></script>
+    <script src="js/reviews-data.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/auth-config.js"></script>
 
-            document.addEventListener('DOMContentLoaded', () => {
-                pModal = new bootstrap.Modal(document.getElementById('productModal'));
-                cModal = new bootstrap.Modal(document.getElementById('categoryModal'));
+    <script>
+        // State
+        let currentMenu = null;
+        let currentReviews = [];
+        let editingContext = null; // { type: 'cat'|'prod'|'review', key, index, subIndex }
 
-                initTabs();
-                if (sessionStorage.getItem('muhabbetAdmin') === 'authenticated') startAdmin();
+        // Bootstrap Modals
+        let catModal, prodModal, revModal, bsToast;
+
+        const LANGUAGES = ['tr', 'en', 'ru', 'ar', 'de'];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('muhabbetAdmin') === 'authenticated') {
+                initAdmin();
+            }
+
+            catModal = new bootstrap.Modal(document.getElementById('categoryModal'));
+            prodModal = new bootstrap.Modal(document.getElementById('productModal'));
+            revModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            bsToast = new bootstrap.Toast(document.getElementById('liveToast'));
+        });
+
+        // Auth
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = document.getElementById('passwordInput').value;
+            if (pass === ADMIN_PASS) {
+                sessionStorage.setItem('muhabbetAdmin', 'authenticated');
+                initAdmin();
+            } else {
+                showToast('Hatalı Şifre!');
+            }
+        });
+
+        function logout() {
+            sessionStorage.removeItem('muhabbetAdmin');
+            window.location.reload();
+        }
+
+        function initAdmin() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+
+            // Load Data
+            currentMenu = getMenuData();
+            currentReviews = getReviews();
+
+            renderStats();
+            renderMenu();
+            renderStaticEditor();
+            renderReviews();
+        }
+
+        function showToast(msg) {
+            document.getElementById('toastMessage').innerText = msg;
+            bsToast.show();
+        }
+
+        // Tabs
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('show', 'active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.style.display = 'block';
+            setTimeout(() => activeTab.classList.add('show', 'active'), 50); // fade fix
+
+            document.getElementById(`tab-${tabName}-btn`).classList.add('active');
+        }
+
+        // Data Saving
+        function saveChanges() {
+            saveMenuData(currentMenu);
+            saveTranslations(); // from i18n.js
+            saveReviews(currentReviews); // from reviews-data.js
+            showToast('✅ Tüm değişiklikler başarıyla kaydedildi!');
+        }
+
+        function resetToDefaults() {
+            if (confirm('DİKKAT: Tüm değişiklikler silinecek ve varsayılan ayarlara dönülecek. Onaylıyor musunuz?')) {
+                currentMenu = resetMenuData();
+                resetTranslations();
+                // reviews usually strictly local provided so maybe don't reset unless desired, but user said reset defaults
+                window.location.reload();
+            }
+        }
+
+        function renderStats() {
+            const catCount = Object.keys(currentMenu).length;
+            let prodCount = 0;
+            Object.values(currentMenu).forEach(c => {
+                if (c.items) prodCount += c.items.length;
+                if (c.subcategories) c.subcategories.forEach(s => prodCount += s.items.length);
             });
 
-            document.getElementById('loginForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (document.getElementById('passwordInput').value === ADMIN_PASS) {
-                    sessionStorage.setItem('muhabbetAdmin', 'authenticated');
-                    startAdmin();
-                } else alert('Hatalı Şifre!');
+            document.getElementById('statProducts').innerText = prodCount;
+            document.getElementById('statCats').innerText = catCount;
+        }
+
+        // --- MENU RENDERER ---
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = '';
+
+            Object.keys(currentMenu).forEach(key => {
+                const cat = currentMenu[key];
+                const sectionBadge = cat.section === 'drink' ? '<span class="badge bg-info text-dark ms-2">İçecek</span>' : '<span class="badge bg-warning text-dark ms-2">Yiyecek</span>';
+
+                const card = document.createElement('div');
+                card.className = 'section-card';
+                card.innerHTML = `
+                    <div class="section-header">
+                        <div class="section-title">
+                            <span style="font-size:1.5rem">${cat.icon || '📦'}</span> 
+                            ${cat.name.tr} 
+                            ${sectionBadge}
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-gold btn-sm" onclick="openCategoryModal('${key}')">Düzenle</button>
+                            <button class="btn btn-gold btn-sm" onclick="openProductModal('${key}')">+ Ürün</button>
+                        </div>
+                    </div>
+                    <div class="item-list">
+                        ${renderCatItems(key, cat)}
+                    </div>
+                `;
+                container.appendChild(card);
             });
+        }
 
-            function startAdmin() {
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                currentMenu = getMenuData();
-                renderMenuContent();
-                renderStaticEditor();
-                updateStats();
-            }
+        function renderCatItems(catKey, cat) {
+            let html = '';
 
-            function logout() { sessionStorage.removeItem('muhabbetAdmin'); location.reload(); }
-
-            function updateStats() {
-                let total = 0;
-                Object.values(currentMenu).forEach(c => {
-                    if (c.items) total += c.items.length;
-                    if (c.subcategories) c.subcategories.forEach(s => total += s.items.length);
+            // Direct items
+            if (cat.items && cat.items.length > 0) {
+                cat.items.forEach((item, idx) => {
+                    html += createItemRow(catKey, null, idx, item);
                 });
-                document.getElementById('statItems').innerText = total;
-                document.getElementById('statCats').innerText = Object.keys(currentMenu).length;
             }
 
-            function switchSection(sec) {
-                document.getElementById('sectionMenu').style.display = sec === 'menu' ? 'block' : 'none';
-                document.getElementById('sectionContent').style.display = sec === 'content' ? 'block' : 'none';
-                document.getElementById('sectionReviews').style.display = sec === 'reviews' ? 'block' : 'none';
-
-                document.querySelectorAll('.nav-tabs .nav-link').forEach(l => {
-                    const text = l.innerText.toLowerCase();
-                    const isActive = text.includes(sec === 'menu' ? 'ürün' : sec === 'content' ? 'site' : 'yorum');
-                    l.classList.toggle('active', isActive);
-                });
-
-                if (sec === 'reviews') renderAdminReviews();
-            }
-
-            function initTabs() {
-                document.querySelectorAll('.lang-tab').forEach(t => {
-                    t.addEventListener('click', () => {
-                        activeLangTab = t.dataset.lang;
-                        document.querySelectorAll('.lang-tab').forEach(b => b.classList.toggle('active', b.dataset.lang === activeLangTab));
-                        document.querySelectorAll('.lang-pane').forEach(p => p.style.display = p.dataset.lang === activeLangTab ? 'block' : 'none');
+            // Subcategories
+            if (cat.subcategories) {
+                cat.subcategories.forEach((sub, sIdx) => {
+                    const subName = typeof sub.name === 'object' ? sub.name.tr : sub.name;
+                    html += `
+                        <div class="subcat-divider">
+                            <span>${subName}</span>
+                            <button class="btn btn-sm btn-link text-warning text-decoration-none p-0" onclick="openProductModal('${catKey}', ${sIdx})">+ Ekle</button>    
+                        </div>`;
+                    sub.items.forEach((item, idx) => {
+                        html += createItemRow(catKey, sIdx, idx, item);
                     });
                 });
             }
+            return html;
+        }
 
-            function renderMenuContent() {
-                const list = document.getElementById('menuCategoryList');
-                list.innerHTML = '';
-                Object.keys(currentMenu).forEach(key => {
-                    const cat = currentMenu[key];
-                    const div = document.createElement('div');
-                    div.className = 'cat-card';
-                    div.innerHTML = `
-                    <div class="cat-card-header">
-                        <div class="cat-title">${cat.icon || '📋'} ${cat.name.tr}</div>
-                        <div class="d-flex gap-2">
-                             <button class="btn btn-outline-gold btn-sm" onclick="showCategoryModal('${key}')"><i class="bi bi-pencil"></i></button>
-                             <button class="btn btn-fire btn-sm" onclick="deleteCategory('${key}')"><i class="bi bi-trash"></i></button>
-                             <button class="btn btn-gold btn-sm" onclick="showProductModal('${key}')"><i class="bi bi-plus"></i> Ürün</button>
+        function createItemRow(catKey, subIdx, idx, item) {
+            const sIdxParam = subIdx === null ? 'null' : subIdx;
+            return `
+                <div class="item-row" onclick="openProductModal('${catKey}', ${sIdxParam}, ${idx})">
+                    <div class="flex-grow-1">
+                        <span class="item-name">${item.name.tr}</span>
+                        <span class="item-desc">${item.description?.tr || ''}</span>
+                    </div>
+                    <div class="item-price">${item.price}₺</div>
+                    <div class="ms-3 text-muted"><i class="bi bi-chevron-right"></i></div>
+                </div>
+            `;
+        }
+
+        // --- CATEGORY MODAL ---
+        function openCategoryModal(key = null) {
+            editingContext = key ? { type: 'cat', key } : { type: 'cat', isNew: true };
+            const cat = key ? currentMenu[key] : null;
+
+            // Render inputs for each lang
+            const container = document.getElementById('catNameInputs');
+            container.innerHTML = '';
+            LANGUAGES.forEach(lang => {
+                const val = cat ? (cat.name[lang] || '') : '';
+                container.innerHTML += `
+                    <div class="lang-field cat-lang-field" data-lang="${lang}" style="display:${lang === 'tr' ? 'block' : 'none'}">
+                        <label class="form-label">${lang.toUpperCase()} Kategori Adı</label>
+                        <input type="text" class="form-control" id="catName_${lang}" value="${val}">
+                    </div>
+                `;
+            });
+
+            document.getElementById('catIcon').value = cat ? cat.icon : '🍽️';
+            document.getElementById('catSection').value = cat ? cat.section : 'food';
+
+            document.getElementById('btnDeleteCat').style.display = key ? 'block' : 'none';
+            setModalLang('cat', 'tr');
+            catModal.show();
+        }
+
+        function saveCategory() {
+            const key = editingContext.isNew ? 'cat_' + Date.now() : editingContext.key;
+            const cat = currentMenu[key] || { key, name: {}, items: [] };
+
+            LANGUAGES.forEach(lang => {
+                cat.name[lang] = document.getElementById(`catName_${lang}`).value.trim() || document.getElementById('catName_tr').value;
+            });
+            cat.icon = document.getElementById('catIcon').value;
+            cat.section = document.getElementById('catSection').value;
+
+            currentMenu[key] = cat;
+            catModal.hide();
+            renderMenu();
+            renderStats();
+            showToast('Kategori kaydedildi - KAYDET butonuna basmayı unutmayın!');
+        }
+
+        function deleteCategory() {
+            if (confirm('Kategoriyi ve içindeki tüm ürünleri silmek istiyor musunuz?')) {
+                delete currentMenu[editingContext.key];
+                catModal.hide();
+                renderMenu();
+                renderStats();
+                showToast('Kategori silindi.');
+            }
+        }
+
+        // --- PRODUCT MODAL ---
+        function openProductModal(catKey, subIdx = null, index = null) {
+            editingContext = { type: 'prod', catKey, subIdx, index };
+            const isNew = index === null;
+
+            let item = null;
+            if (!isNew) {
+                if (subIdx !== null) item = currentMenu[catKey].subcategories[subIdx].items[index];
+                else item = currentMenu[catKey].items[index];
+            }
+
+            const container = document.getElementById('prodInputs');
+            container.innerHTML = '';
+            LANGUAGES.forEach(lang => {
+                const name = item ? (item.name[lang] || '') : '';
+                const desc = item ? (item.description?.[lang] || '') : '';
+                container.innerHTML += `
+                    <div class="lang-field prod-lang-field" data-lang="${lang}" style="display:${lang === 'tr' ? 'block' : 'none'}">
+                        <div class="mb-3">
+                            <label class="form-label">${lang.toUpperCase()} Ürün Adı</label>
+                            <input type="text" class="form-control" id="pName_${lang}" value="${name}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">${lang.toUpperCase()} Açıklama</label>
+                            <textarea class="form-control" id="pDesc_${lang}" rows="2">${desc}</textarea>
                         </div>
                     </div>
-                    <div class="product-list">
-                        ${cat.items ? cat.items.map((it, idx) => `
-                            <div class="product-row" onclick="showProductModal('${key}', ${idx})">
-                                <div class="product-info">
-                                    <span class="product-name">${it.name.tr}</span>
-                                    <span class="product-desc">${it.description?.tr || 'Açıklama yok...'}</span>
-                                </div>
-                                <div class="product-price">${it.price}₺</div>
-                            </div>
-                        `).join('') : ''}
-                        
-                        ${cat.subcategories ? cat.subcategories.map((sub, sIdx) => `
-                            <div class="section-divider small text-muted mt-3 mb-2 px-2 d-flex align-items-center gap-2">
-                                <span class="fw-bold">${typeof sub.name === 'object' ? sub.name.tr : sub.name}</span>
-                                <div class="flex-grow-1 border-bottom border-secondary opacity-25"></div>
-                                <button class="btn btn-gold btn-sm py-0 px-2" onclick="showProductModal('${key}', null, ${sIdx})">+</button>
-                            </div>
-                            ${sub.items.map((it, idx) => `
-                                <div class="product-row" onclick="showProductModal('${key}', ${idx}, ${sIdx})">
-                                    <div class="product-info">
-                                        <span class="product-name">${it.name.tr}</span>
-                                        <span class="product-desc">${it.description?.tr || ''}</span>
-                                    </div>
-                                    <div class="product-price">${it.price}₺</div>
-                                </div>
-                            `).join('')}
-                        `).join('') : ''}
+                `;
+            });
+
+            document.getElementById('prodPrice').value = item ? item.price : '';
+            document.getElementById('btnDeleteProd').style.display = isNew ? 'none' : 'block';
+
+            setModalLang('prod', 'tr');
+            prodModal.show();
+        }
+
+        function saveProduct() {
+            const { catKey, subIdx, index } = editingContext;
+            const price = parseInt(document.getElementById('prodPrice').value) || 0;
+
+            const newItem = { name: {}, description: {}, price };
+            LANGUAGES.forEach(lang => {
+                newItem.name[lang] = document.getElementById(`pName_${lang}`).value.trim() || document.getElementById('pName_tr').value;
+                newItem.description[lang] = document.getElementById(`pDesc_${lang}`).value.trim();
+            });
+
+            const targetArray = (subIdx !== null)
+                ? currentMenu[catKey].subcategories[subIdx].items
+                : currentMenu[catKey].items;
+
+            if (index !== null) {
+                targetArray[index] = newItem;
+            } else {
+                targetArray.push(newItem);
+            }
+
+            prodModal.hide();
+            renderMenu();
+            renderStats();
+            showToast('Ürün güncellendi.');
+        }
+
+        function deleteProduct() {
+            if (confirm('Ürünü silmek istiyor musunuz?')) {
+                const { catKey, subIdx, index } = editingContext;
+                const targetArray = (subIdx !== null)
+                    ? currentMenu[catKey].subcategories[subIdx].items
+                    : currentMenu[catKey].items;
+                targetArray.splice(index, 1);
+                prodModal.hide();
+                renderMenu();
+                renderStats();
+                showToast('Ürün silindi.');
+            }
+        }
+
+        // --- REVIEWS ---
+        function renderReviews() {
+            const div = document.getElementById('reviewsContainer');
+            div.innerHTML = '';
+            if (currentReviews.length === 0) div.innerHTML = '<p class="text-muted text-center p-3">Henüz yorum yok.</p>';
+
+            currentReviews.forEach((r, i) => {
+                div.innerHTML += `
+                    <div class="d-flex justify-content-between align-items-center p-3 border-bottom border-secondary">
+                        <div>
+                            <strong class="text-white">${r.name}</strong> <span class="text-warning">(${r.rating}★)</span>
+                            <div class="text-muted small">"${r.text}"</div>
+                            <small class="text-muted opacity-50">${r.date}</small>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteReview(${i})"><i class="bi bi-trash"></i></button>
                     </div>
                 `;
-                    list.appendChild(div);
-                });
+            });
+        }
+
+        function openReviewModal() {
+            document.getElementById('revName').value = '';
+            document.getElementById('revText').value = '';
+            document.getElementById('revDate').value = '';
+            revModal.show();
+        }
+
+        function saveReview() {
+            const name = document.getElementById('revName').value;
+            const text = document.getElementById('revText').value;
+            const date = document.getElementById('revDate').value;
+
+            if (!name || !text) return alert('Ad ve Yorum zorunludur');
+
+            currentReviews.push({ name, text, date: date || 'Yeni', rating: 5 });
+            revModal.hide();
+            renderReviews();
+            showToast('Yorum eklendi ve taslağa alındı.');
+        }
+
+        function deleteReview(idx) {
+            if (confirm('Silmek istediğinize emin misiniz?')) {
+                currentReviews.splice(idx, 1);
+                renderReviews();
             }
+        }
 
-            // --- Product Modal Logic ---
-            function showProductModal(catKey, index = null, subIndex = null) {
-                editingProduct = { catKey, index, subIndex };
-                const container = document.getElementById('productForms');
-                container.innerHTML = '';
-
-                const languages = ['tr', 'en', 'ru', 'ar', 'de'];
-                let item = null;
-                if (index !== null) {
-                    item = (subIndex !== null)
-                        ? currentMenu[catKey].subcategories[subIndex].items[index]
-                        : currentMenu[catKey].items[index];
-                }
-
-                languages.forEach(lang => {
-                    const div = document.createElement('div');
-                    div.className = 'lang-pane';
-                    div.dataset.lang = lang;
-                    div.style.display = lang === activeLangTab ? 'block' : 'none';
-                    div.innerHTML = `
-                    <div class="mb-3">
-                        <label class="form-label">${lang.toUpperCase()} ADI</label>
-                        <input type="text" class="form-control" id="pName_${lang}" value="${item ? (item.name[lang] || '') : ''}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">${lang.toUpperCase()} AÇIKLAMA</label>
-                        <textarea class="form-control" id="pDesc_${lang}" rows="2">${item ? (item.description?.[lang] || '') : ''}</textarea>
-                    </div>
-                `;
-                    container.appendChild(div);
-                });
-
-                document.getElementById('prodPrice').value = item ? item.price : '';
-                document.getElementById('prodDeleteBtn').style.display = index !== null ? 'block' : 'none';
-                document.getElementById('prodDeleteBtn').onclick = deleteProduct;
-                pModal.show();
-            }
-
-            function saveProduct() {
-                const { catKey, index, subIndex } = editingProduct;
-                const item = { name: {}, description: {}, price: parseInt(document.getElementById('prodPrice').value) };
-
-                ['tr', 'en', 'ru', 'ar', 'de'].forEach(l => {
-                    item.name[l] = document.getElementById(`pName_${l}`).value || document.getElementById(`pName_tr`).value;
-                    item.description[l] = document.getElementById(`pDesc_${l}`).value;
-                });
-
-                if (index !== null) {
-                    if (subIndex !== null) currentMenu[catKey].subcategories[subIndex].items[index] = item;
-                    else currentMenu[catKey].items[index] = item;
-                } else {
-                    if (subIndex !== null) currentMenu[catKey].subcategories[subIndex].items.push(item);
-                    else currentMenu[catKey].items.push(item);
-                }
-
-                pModal.hide();
-                renderMenuContent();
-                updateStats();
-                notify('İşlem tamamlandı.');
-            }
-
-            function deleteProduct() {
-                const { catKey, index, subIndex } = editingProduct;
-                if (confirm('Siliyorsunuz, emin misiniz?')) {
-                    if (subIndex !== null) currentMenu[catKey].subcategories[subIndex].items.splice(index, 1);
-                    else currentMenu[catKey].items.splice(index, 1);
-
-                    pModal.hide();
-                    renderMenuContent();
-                    updateStats();
-                }
-            }
-
-            // --- Category Modal Logic ---
-            function showCategoryModal(key = null) {
-                editingCategory = key;
-                const container = document.getElementById('categoryForms');
-                container.innerHTML = '';
-                const cat = key ? currentMenu[key] : null;
-
-                ['tr', 'en', 'ru', 'ar', 'de'].forEach(lang => {
-                    const div = document.createElement('div');
-                    div.className = 'lang-pane';
-                    div.dataset.lang = lang;
-                    div.style.display = lang === activeLangTab ? 'block' : 'none';
-                    div.innerHTML = `
-                    <div class="mb-2">
-                        <label class="form-label">${lang.toUpperCase()} KATEGORİ ADI</label>
-                        <input type="text" class="form-control" id="cName_${lang}" value="${cat ? (cat.name[lang] || '') : ''}">
-                    </div>
-                `;
-                    container.appendChild(div);
-                });
-
-                document.getElementById('catIcon').value = cat ? cat.icon : '🍽️';
-                document.getElementById('catSection').value = cat ? cat.section : 'food';
-                cModal.show();
-            }
-
-            function saveCategory() {
-                const key = editingCategory || 'cat_' + Date.now();
-                const cat = currentMenu[key] || { key, items: [], section: 'food', name: {} };
-
-                ['tr', 'en', 'ru', 'ar', 'de'].forEach(l => {
-                    cat.name[l] = document.getElementById(`cName_${l}`).value;
-                });
-                cat.icon = document.getElementById('catIcon').value;
-                cat.section = document.getElementById('catSection').value;
-
-                currentMenu[key] = cat;
-                cModal.hide();
-                renderMenuContent();
-                notify('Kategori güncellendi.');
-            }
-
-            function deleteCategory(key) {
-                if (confirm('Siliyorsunuz, emin misiniz?')) {
-                    delete currentMenu[key];
-                    renderMenuContent();
-                    updateStats();
-                }
-            }
-
-            // --- CMS Static Content Logic ---
-            function renderStaticEditor() {
-                const container = document.getElementById('staticContentEditor');
-                let html = `
-                <div class="lang-tabs d-flex">
-                    <button class="lang-tab active" data-lang="tr" onclick="setStaticLang('tr')">TR</button>
-                    <button class="lang-tab" data-lang="en" onclick="setStaticLang('en')">EN</button>
-                    <button class="lang-tab" data-lang="ru" onclick="setStaticLang('ru')">RU</button>
-                    <button class="lang-tab" data-lang="ar" onclick="setStaticLang('ar')">AR</button>
-                    <button class="lang-tab" data-lang="de" onclick="setStaticLang('de')">DE</button>
+        // --- STATIC CONTENT EDITOR ---
+        function renderStaticEditor() {
+            const container = document.getElementById('staticContentEditor');
+            let html = `
+                <div class="lang-tabs mb-3">
+                    ${LANGUAGES.map(l => `<button class="lang-tab-btn ${l === 'tr' ? 'active' : ''}" onclick="setStaticLang('${l}')" id="stBtn_${l}">${l.toUpperCase()}</button>`).join('')}
                 </div>
             `;
 
-                ['tr', 'en', 'ru', 'ar', 'de'].forEach(l => {
-                    const tr = translations[l];
-                    html += `
-                    <div class="static-pane" data-slang="${l}" style="display:${l === 'tr' ? 'block' : 'none'}">
+            LANGUAGES.forEach(l => {
+                const trs = translations[l]; // from i18n
+                html += `
+                    <div class="static-lang-pane" id="stPane_${l}" style="display:${l === 'tr' ? 'block' : 'none'}">
                         <div class="mb-3">
-                            <label class="form-label">Ana Başlık 1 (Arapça gibi dillerde hizalamaya dikkat)</label>
-                            <input type="text" class="form-control" onchange="updateStatic('${l}', 'hero_title_1', this.value)" value="${tr.hero_title_1}">
+                            <label class="form-label">Hero Başlık 1</label>
+                            <input type="text" class="form-control" value="${trs.hero_title_1}" onchange="updateStatic('${l}','hero_title_1',this.value)">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Hero Alt Başlık</label>
-                            <textarea class="form-control" rows="3" onchange="updateStatic('${l}', 'hero_subtitle', this.value)">${tr.hero_subtitle}</textarea>
+                            <textarea class="form-control" rows="2" onchange="updateStatic('${l}','hero_subtitle',this.value)">${trs.hero_subtitle}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Hakkımızda Yazısı</label>
-                            <textarea class="form-control" rows="5" onchange="updateStatic('${l}', 'about_text', this.value)">${tr.about_text}</textarea>
+                            <label class="form-label">Hakkımızda Metni</label>
+                            <textarea class="form-control" rows="4" onchange="updateStatic('${l}','about_text',this.value)">${trs.about_text}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Adres</label>
+                            <input type="text" class="form-control" value="${trs.address}" onchange="updateStatic('${l}','address',this.value)">
                         </div>
                     </div>
                 `;
-                });
-                container.innerHTML = html;
+            });
+            container.innerHTML = html;
+        }
+
+        function updateStatic(lang, key, val) {
+            translations[lang][key] = val;
+            // No auto save, waits for global save
+        }
+
+        function setStaticLang(lang) {
+            document.querySelectorAll('.static-lang-pane').forEach(el => el.style.display = 'none');
+            document.getElementById(`stPane_${lang}`).style.display = 'block';
+            document.querySelectorAll('#staticContentEditor .lang-tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`stBtn_${lang}`).classList.add('active');
+        }
+
+        // --- UTILS ---
+        function setModalLang(type, lang) {
+            // type: cat or prod
+            document.querySelectorAll(`.${type}-lang-field`).forEach(el => el.style.display = 'none');
+            document.querySelectorAll(`.${type}-lang-field[data-lang="${lang}"]`).forEach(el => el.style.display = 'block');
+
+            const tabContainer = type === 'cat' ? 'catLangTabs' : 'prodLangTabs';
+            document.querySelectorAll(`#${tabContainer} .lang-tab-btn`).forEach(b => b.classList.remove('active'));
+            // Find the button with onclick containing this lang and add active
+            // Simpler: Just rely on loop index if possible? Or re-render?
+            // Let's just create unique IDs or select by text content for simplicity in this vanilla Setup
+            const tabs = document.getElementById(tabContainer).children;
+            for (let btn of tabs) {
+                if (btn.innerText === lang.toUpperCase()) btn.classList.add('active');
             }
+        }
 
-            function setStaticLang(l) {
-                document.querySelectorAll('.static-pane').forEach(p => p.style.display = p.dataset.slang === l ? 'block' : 'none');
-                document.querySelectorAll('#staticContentEditor .lang-tab').forEach(b => b.classList.toggle('active', b.innerText === l.toUpperCase()));
-            }
+        function autoFillTranslations() {
+            const trName = document.getElementById('pName_tr').value;
+            if (!trName) return alert('Önce Türkçe ismini yazın.');
 
-            function updateStatic(lang, key, val) { translations[lang][key] = val; }
+            // Simulation of AI Translation using the helper from menu-data.js if available, or simple suffix
+            LANGUAGES.forEach(l => {
+                if (l === 'tr') return;
+                const nameInput = document.getElementById(`pName_${l}`);
+                const descInput = document.getElementById(`pDesc_${l}`);
 
-            function saveChanges() {
-                saveMenuData(currentMenu);
-                notify('TÜM DEĞİŞİKLİKLER BULUTA (LOCALSTORAGE) KAYDEDİLDİ!');
-            }
+                if (!nameInput.value) nameInput.value = trName; // Fallback
 
-            function resetToDefaults() {
-                if (confirm('BU İŞLEM TÜM KATEGORİ VE FİYATLARI SIFIRLAR. EMİN MİSİNİZ?')) {
-                    currentMenu = resetMenuData();
-                    renderMenuContent();
-                    updateStats();
+                // Use the helper if exists
+                if (typeof AIDescriptionProvider !== 'undefined') {
+                    const aiDesc = AIDescriptionProvider.generate(trName, l);
+                    if (aiDesc && !descInput.value) descInput.value = aiDesc;
                 }
-            }
+            });
+            showToast('Diğer diller için taslaklar oluşturuldu.');
+        }
 
-            function notify(m) {
-                document.getElementById('toastMsg').innerText = m;
-                new bootstrap.Toast(document.getElementById('toast')).show();
-            }
-
-            function autoTranslateProduct() {
-                const trName = document.getElementById('pName_tr').value;
-                const trDesc = document.getElementById('pDesc_tr').value;
-                if (!trName) return;
-
-                ['en', 'ru', 'ar', 'de'].forEach(l => {
-                    document.getElementById(`pName_${l}`).value = trName + ' (' + l.toUpperCase() + ')';
-                    document.getElementById(`pDesc_${l}`).value = AIDescriptionProvider.generate(trName, l);
-                });
-                notify('AI Çeviri ve Açıklamalar Tamamlandı!');
-            }
-            // --- Review Management Logic ---
-            let currentReviews = [];
-            let rModal;
-
-            function renderAdminReviews() {
-                currentReviews = getReviews();
-                const list = document.getElementById('adminReviewList');
-                list.innerHTML = '';
-
-                currentReviews.forEach((rev, idx) => {
-                    const div = document.createElement('div');
-                    div.className = 'product-row';
-                    div.innerHTML = `
-                    <div class="product-info">
-                        <span class="product-name">${rev.name} <span class="text-warning">(${'★'.repeat(rev.rating)})</span></span>
-                        <span class="product-desc italic text-muted">"${rev.text}"</span>
-                        <span class="product-desc small opacity-50">${rev.date}</span>
-                    </div>
-                    <button class="btn btn-fire btn-sm" onclick="removeReview(${idx})"><i class="bi bi-trash"></i></button>
-                `;
-                    list.appendChild(div);
-                });
-            }
-
-            function showReviewModal() {
-                rModal = new bootstrap.Modal(document.getElementById('reviewModal'));
-                rModal.show();
-            }
-
-            function addNewReview() {
-                const name = document.getElementById('revName').value;
-                const text = document.getElementById('revText').value;
-                const date = document.getElementById('revDate').value;
-
-                if (!name || !text) return notify('Lütfen tüm alanları doldurun.');
-
-                currentReviews.push({ name, text, date: date || 'Bugün', rating: 5 });
-                saveReviews(currentReviews);
-                rModal.hide();
-                renderAdminReviews();
-                notify('Yorum eklendi.');
-            }
-
-            function removeReview(idx) {
-                if (confirm('Bu yorumu silmek istediğinize emin misiniz?')) {
-                    currentReviews.splice(idx, 1);
-                    saveReviews(currentReviews);
-                    renderAdminReviews();
-                    notify('Yorum silindi.');
-                }
-            }
-        </script>
+    </script>
 </body>
 
 </html>

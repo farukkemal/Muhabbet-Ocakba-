@@ -3,7 +3,7 @@
  * Languages: Turkish (TR), English (EN), Russian (RU), Arabic (AR), German (DE)
  */
 
-const translations = {
+const defaultTranslations = {
   tr: {
     nav_home: "Ana Sayfa",
     nav_menu: "Menümüz",
@@ -257,6 +257,26 @@ const translations = {
     reviews_subtitle: "Unsere am besten bewerteten 5-Sterne-Bewertungen bei Google."
   }
 };
+
+let translations = defaultTranslations;
+
+function loadTranslations() {
+  const stored = localStorage.getItem('muhabbetTranslations');
+  if (stored) {
+    translations = JSON.parse(stored);
+  }
+}
+loadTranslations();
+
+function saveTranslations() {
+  localStorage.setItem('muhabbetTranslations', JSON.stringify(translations));
+}
+
+function resetTranslations() {
+  localStorage.removeItem('muhabbetTranslations');
+  translations = JSON.parse(JSON.stringify(defaultTranslations));
+  return translations;
+}
 
 let currentLang = localStorage.getItem('muhabbetLang') || 'tr';
 
