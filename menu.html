@@ -306,6 +306,75 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
             font-size: 26px;
         }
+
+        .fab-share {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            font-size: 22px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .fab-share:hover {
+            transform: scale(1.1);
+            background: #e6c200;
+        }
+
+        /* Share button in menu header */
+        .share-menu-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: var(--whatsapp);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 3px 12px rgba(37, 211, 102, 0.4);
+        }
+
+        .share-menu-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        /* Toast notification */
+        .share-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(37, 211, 102, 0.95);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .share-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
 
@@ -326,6 +395,7 @@
                 <button class="lang-btn" data-lang="ru">🇷🇺 RU</button>
                 <button class="lang-btn" data-lang="de">🇩🇪 DE</button>
                 <button class="lang-btn" data-lang="ar">🇸🇦 AR</button>
+                <button class="lang-btn" data-lang="zh">🇨🇳 ZH</button>
             </div>
         </div>
     </nav>
@@ -334,12 +404,21 @@
         <div class="menu-header">
             <h1 data-i18n="nav_menu">Menü</h1>
             <p data-i18n="price_note">Fiyatlar değişebilir</p>
+            <button class="share-menu-btn" id="share-menu-btn" onclick="shareMenuOnWhatsApp()">
+                <i class="bi bi-whatsapp"></i>
+                <span data-i18n="share_menu">Menüyü Paylaş</span>
+            </button>
         </div>
 
         <div id="menu-container" class="container"></div>
     </main>
 
+    <div class="share-toast" id="share-toast"></div>
+
     <div class="fab-container">
+        <button class="fab-share" onclick="shareMenuOnWhatsApp()" title="Menüyü Paylaş">
+            <i class="bi bi-share-fill"></i>
+        </button>
         <a href="https://wa.me/905421105565" class="fab"><i class="bi bi-whatsapp"></i></a>
     </div>
 
@@ -355,7 +434,13 @@
             Object.values(data).forEach((cat, index) => {
                 const section = cat.section || 'food';
                 if (section !== lastSection) {
-                    const label = section === 'food' ? t('tab_food') : t('tab_drink');
+                    const sectionKeyMap = {
+                        food: 'tab_food', drink: 'tab_drink',
+                        salads: 'tab_salads', sweets: 'tab_sweets', alcohol: 'tab_alcohol',
+                        mezeler: 'tab_mezeler', ara_sicaklar: 'tab_ara_sicaklar',
+                        et_balik: 'tab_et_balik', tas_firin: 'tab_tas_firin', durumler: 'tab_durumler'
+                    };
+                    const label = t(sectionKeyMap[section] || section);
                     const div = document.createElement('div');
                     div.className = 'section-divider';
                     div.innerHTML = `<span>${label}</span>`;
@@ -431,6 +516,46 @@
 
         window.addEventListener('languageChanged', renderMenu);
         document.addEventListener('DOMContentLoaded', renderMenu);
+
+        function shareMenuOnWhatsApp() {
+            const lang = document.documentElement.lang || 'tr';
+            const menuUrl = window.location.origin + window.location.pathname;
+
+            const messages = {
+                tr: `🍽️ *Muhabbet Ocakbaşı* menüsüne göz atmak ister misin?\n\n🔥 Birbirinden lezzetli mezeler, etler, pide ve daha fazlası!\n\n📋 Menü: ${menuUrl}\n\n📍 Beylikdüzü / Yakuplu • 📞 0 542 110 55 65`,
+                en: `🍽️ Check out the *Muhabbet Ocakbaşı* menu!\n\n🔥 Delicious starters, grills, pides and more!\n\n📋 Menu: ${menuUrl}\n\n📍 Beylikdüzü / Yakuplu • 📞 0 542 110 55 65`,
+                ru: `🍽️ Посмотрите меню *Muhabbet Ocakbaşı*!\n\n🔥 Вкусные закуски, гриль, пиде и многое другое!\n\n📋 Меню: ${menuUrl}\n\n📍 Beylikdüzü / Yakuplu • 📞 0 542 110 55 65`,
+                ar: `🍽️ تفضل بالاطلاع على قائمة طعام *Muhabbet Ocakbaşı*!\n\n🔥 مقبلات شهية ومشويات وبيدا والمزيد!\n\n📋 القائمة: ${menuUrl}\n\n📍 Beylikdüzü / Yakuplu • 📞 0 542 110 55 65`,
+                de: `🍽️ Schau dir die *Muhabbet Ocakbaşı* Speisekarte an!\n\n🔥 Leckere Vorspeisen, Grill, Pide und mehr!\n\n📋 Menü: ${menuUrl}\n\n📍 Beylikdüzü / Yakuplu • 📞 0 542 110 55 65`,
+                zh: `🍽️ 来看看 *Muhabbet Ocakbaşı* 的菜单！\n\n🔥 美味前菜、烤肉、皮德和更多！\n\n📋 菜单: ${menuUrl}\n\n📍 Beylikdüzü / Yakuplu • 📞 0 542 110 55 65`
+            };
+
+            const toastTexts = {
+                tr: '✅ Paylaşım açıldı!', en: '✅ Sharing opened!',
+                ru: '✅ Открыто!', ar: '✅ تم الفتح!',
+                de: '✅ Geöffnet!', zh: '✅ 已打开！'
+            };
+
+            const message = messages[lang] || messages.tr;
+            const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+            // Try native share API first (mobile)
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Muhabbet Ocakbaşı Menü',
+                    text: message,
+                    url: menuUrl
+                }).catch(() => window.open(waUrl, '_blank'));
+            } else {
+                window.open(waUrl, '_blank');
+            }
+
+            // Show toast
+            const toast = document.getElementById('share-toast');
+            toast.textContent = toastTexts[lang] || toastTexts.tr;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
     </script>
 </body>
 
