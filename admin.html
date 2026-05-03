@@ -384,6 +384,12 @@
                         class="btn btn-outline-gold btn-sm d-flex align-items-center gap-2">
                         <i class="bi bi-box-arrow-up-right"></i> <span class="d-none d-sm-inline">Siteyi Gör</span>
                     </a>
+                    <button onclick="downloadMenuTxt()" class="btn btn-outline-gold btn-sm d-flex align-items-center gap-2" title="Menüyü TXT olarak indir">
+                        <i class="bi bi-file-text"></i> <span class="d-none d-sm-inline">TXT İndir</span>
+                    </button>
+                    <button onclick="downloadMenuJs()" class="btn btn-outline-gold btn-sm d-flex align-items-center gap-2" title="Güncel menüyü menu-data.js olarak indir">
+                        <i class="bi bi-filetype-js"></i> <span class="d-none d-sm-inline">JS İndir</span>
+                    </button>
                     <button onclick="saveChanges()" class="btn btn-gold btn-sm d-flex align-items-center gap-2">
                         <i class="bi bi-cloud-check-fill"></i> <span class="d-none d-sm-inline">Kaydet</span>
                     </button>
@@ -443,6 +449,11 @@
                         <i class="bi bi-chat-quote me-2"></i> Yorumlar
                     </button>
                 </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="switchTab('prices')" id="tab-prices-btn">
+                        <i class="bi bi-tags-fill me-2"></i> Fiyat Araçları
+                    </button>
+                </li>
                 <li class="nav-item ms-auto">
                     <button class="nav-link text-danger" onclick="resetToDefaults()">
                         <i class="bi bi-arrow-counterclockwise me-2"></i> Sıfırla
@@ -480,6 +491,56 @@
                     </button>
                 </div>
                 <div id="reviewsContainer" class="section-card p-2"></div>
+            </div>
+
+            <!-- Fiyat Araçları Tab -->
+            <div id="tab-prices" class="tab-pane fade" style="display:none;">
+                <div class="section-card p-4 mb-4">
+                    <h4 class="mb-1 text-white"><i class="bi bi-lightning-charge-fill text-warning me-2"></i>Toplu Fiyat Güncelleme</h4>
+                    <p class="text-muted small mb-4">Seçili kategorilerdeki tüm ürünlerin fiyatını tek seferde değiştirin. Kaydet butonuna basmadan kalıcı olmaz.</p>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label">Kategori Seç</label>
+                            <select class="form-select" id="bulkCatSelect" onchange="renderBulkPreview()">
+                                <option value="ALL">-- Tüm Kategoriler --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Yeni Fiyat (₺)</label>
+                            <input type="number" class="form-control fs-5 fw-bold text-warning" id="bulkPrice" placeholder="0" oninput="renderBulkPreview()">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">İstisna Ürünler</label>
+                            <input type="text" class="form-control" id="bulkExclude" placeholder="Kadeh, Selection..." title="Virgülle ayırın" oninput="renderBulkPreview()">
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button class="btn btn-gold w-100 py-2" onclick="applyBulkPrice()">
+                                <i class="bi bi-check-lg me-2"></i>Uygula
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Önizleme -->
+                    <div id="bulkPreview"></div>
+                </div>
+
+                <!-- JS Dosya Talimatları -->
+                <div class="section-card p-4">
+                    <h5 class="text-white mb-3"><i class="bi bi-cloud-arrow-up-fill text-info me-2"></i>Kalıcı Güncelleme (Hosting)</h5>
+                    <div class="alert" style="background:rgba(3,218,198,0.08);border:1px solid rgba(3,218,198,0.3);color:#a0e0d8;border-radius:10px;">
+                        <ol class="mb-0 small" style="line-height:2">
+                            <li>Yukarıdaki <strong>Fiyat Araçları</strong> ile değişiklikleri yapın.</li>
+                            <li><strong>Kaydet</strong> butonuna basın (tarayıcıya kaydeder).</li>
+                            <li>Navbar'daki <strong><i class="bi bi-filetype-js"></i> JS İndir</strong> butonuna tıklayın.</li>
+                            <li>İndirilen <code>menu-data.js</code> dosyasını hosting'inizde <code>js/</code> klasörüne yükleyin.</li>
+                            <li>✅ Artık tüm cihazlarda güncel fiyatlar görünür!</li>
+                        </ol>
+                    </div>
+                    <button class="btn btn-outline-gold mt-3" onclick="downloadMenuJs()">
+                        <i class="bi bi-filetype-js me-2"></i>menu-data.js Dosyasını İndir
+                    </button>
+                </div>
             </div>
 
         </main>
@@ -688,6 +749,121 @@
             document.getElementById(`tab-${tabName}-btn`).classList.add('active');
         }
 
+        // --- JS EXPORT (Kalıcı Güncelleme için) ---
+        function downloadMenuJs() {
+            const data = currentMenu || getMenuData();
+            const jsonStr = JSON.stringify(data, null, 4)
+                .replace(/"price": (\d+)/g, 'price: $1')
+                .replace(/"key": "([^"]+)"/g, 'key: "$1"')
+                .replace(/"section": "([^"]+)"/g, 'section: "$1"')
+                .replace(/"icon": "([^"]+)"/g, 'icon: "$1"')
+                .replace(/"name": "([^"]+)"/g, 'name: "$1"');
+
+            // Proper JS export with full structure
+            const fullJs = `/**
+ * Muhabbet Ocakbaşı - Multilingual Menu Data
+ * Supports 5 languages: TR, EN, RU, AR, DE
+ * Son güncelleme: ${new Date().toLocaleString('tr-TR')}
+ */
+
+const DEFAULT_LANG = 'tr';
+
+const menuData = ${JSON.stringify(data, null, 4)};
+
+function getCurrentLang() { return localStorage.getItem('muhabbetLang') || DEFAULT_LANG; }
+function t_obj(obj) { if (!obj) return ''; if (typeof obj === 'string') return obj; const lang = getCurrentLang(); return obj[lang] || obj[DEFAULT_LANG] || ''; }
+function getMenuData() {
+    try {
+        const stored = localStorage.getItem('muhabbetMenu');
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+                return parsed;
+            }
+        }
+    } catch(e) {
+        console.warn('[Menu] localStorage okuma hatası, varsayılan veri kullanılıyor:', e);
+        try { localStorage.removeItem('muhabbetMenu'); } catch(_) {}
+    }
+    return menuData;
+}
+function saveMenuData(data) {
+    try {
+        localStorage.setItem('muhabbetMenu', JSON.stringify(data));
+    } catch(e) {
+        console.error('[Menu] Kaydetme hatası (localStorage dolu olabilir):', e);
+        alert('⚠️ Menü kaydedilemedi! Tarayıcı deposu dolu olabilir. Lütfen tarayıcı önbelleğini temizleyin.');
+    }
+}
+function resetMenuData() { localStorage.removeItem('muhabbetMenu'); return menuData; }
+const AIDescriptionProvider = { generate: function (itemName, lang = 'tr') { const d = { tr: "Usta ellerden çıkan, taze malzemelerle hazırlanan eşsiz bir lezzet deneyimi.", en: "A unique flavor experience prepared by master hands with fresh ingredients.", ru: "Уникальный вкус, приготовленный из свежих ингредиентов.", ar: "تجربة نكهة فريدة من نوعها أعدها أساتذة بمكونات طازجة.", de: "Ein einzigartiges Geschmackserlebnis, frisch von Meisterhand zubereitet.", zh: "大师之手精心烹制，新鲜食材带来独特风味体验。" }; return d[lang]; } };
+`;
+            const blob = new Blob([fullJs], { type: 'text/javascript;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'menu-data.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('📦 menu-data.js indirildi! js/ klasörüne yükleyin.');
+        }
+
+        // --- TXT EXPORT ---
+        function downloadMenuTxt() {
+            const data = currentMenu || getMenuData();
+            let lines = [];
+            lines.push('╔══════════════════════════════════════╗');
+            lines.push('║      MUHABBET OCAKBAŞI - MENÜ        ║');
+            lines.push('╚══════════════════════════════════════╝');
+            lines.push('');
+
+            Object.values(data).forEach(cat => {
+                const catName = (cat.name && cat.name.tr) ? cat.name.tr : (cat.name || '');
+                lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                lines.push(`  ${cat.icon || '•'}  ${catName.toUpperCase()}`);
+                lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+                if (cat.items && cat.items.length > 0) {
+                    cat.items.forEach(item => {
+                        const name = (item.name && item.name.tr) ? item.name.tr : (item.name || '');
+                        const price = item.price ? `${item.price}₺` : '';
+                        const dots = '.'.repeat(Math.max(2, 45 - name.length - price.length));
+                        lines.push(`  • ${name} ${dots} ${price}`);
+                    });
+                }
+
+                if (cat.subcategories) {
+                    cat.subcategories.forEach(sub => {
+                        const subName = typeof sub.name === 'object' ? (sub.name.tr || sub.name) : sub.name;
+                        lines.push('');
+                        lines.push(`  [ ${subName} ]`);
+                        sub.items.forEach(item => {
+                            const name = (item.name && item.name.tr) ? item.name.tr : (item.name || '');
+                            const price = item.price ? `${item.price}₺` : '';
+                            const dots = '.'.repeat(Math.max(2, 43 - name.length - price.length));
+                            lines.push(`    • ${name} ${dots} ${price}`);
+                        });
+                    });
+                }
+
+                lines.push('');
+            });
+
+            const content = lines.join('\n');
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'muhabbet-menu.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('📄 Menü TXT olarak indirildi!');
+        }
+
         // Data Saving
         function saveChanges() {
             saveMenuData(currentMenu);
@@ -826,15 +1002,17 @@
             cat.section = document.getElementById('catSection').value;
 
             currentMenu[key] = cat;
+            saveMenuData(currentMenu);
             catModal.hide();
             renderMenu();
             renderStats();
-            showToast('Kategori kaydedildi - KAYDET butonuna basmayı unutmayın!');
+            showToast('✅ Kategori kaydedildi!');
         }
 
         function deleteCategory() {
             if (confirm('Kategoriyi ve içindeki tüm ürünleri silmek istiyor musunuz?')) {
                 delete currentMenu[editingContext.key];
+                saveMenuData(currentMenu);
                 catModal.hide();
                 renderMenu();
                 renderStats();
@@ -899,10 +1077,11 @@
                 targetArray.push(newItem);
             }
 
+            saveMenuData(currentMenu);
             prodModal.hide();
             renderMenu();
             renderStats();
-            showToast('Ürün güncellendi.');
+            showToast('✅ Ürün kaydedildi!');
         }
 
         function deleteProduct() {
@@ -912,6 +1091,7 @@
                     ? currentMenu[catKey].subcategories[subIdx].items
                     : currentMenu[catKey].items;
                 targetArray.splice(index, 1);
+                saveMenuData(currentMenu);
                 prodModal.hide();
                 renderMenu();
                 renderStats();
@@ -1029,6 +1209,104 @@
                 if (btn.innerText === lang.toUpperCase()) btn.classList.add('active');
             }
         }
+
+        // --- BULK PRICE TOOLS ---
+        function initBulkPriceTab() {
+            const sel = document.getElementById('bulkCatSelect');
+            // Clear old options except first
+            while (sel.options.length > 1) sel.remove(1);
+            Object.keys(currentMenu).forEach(key => {
+                const cat = currentMenu[key];
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.text = (cat.icon || '') + ' ' + (cat.name?.tr || key);
+                sel.appendChild(opt);
+            });
+            renderBulkPreview();
+        }
+
+        function renderBulkPreview() {
+            const catKey = document.getElementById('bulkCatSelect').value;
+            const newPrice = parseInt(document.getElementById('bulkPrice').value);
+            const excludeRaw = document.getElementById('bulkExclude').value;
+            const excludes = excludeRaw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+
+            const preview = document.getElementById('bulkPreview');
+            if (!newPrice) { preview.innerHTML = '<p class="text-muted small">Fiyat girdikten sonra önizleme burada görünür.</p>'; return; }
+
+            let html = '<div class="table-responsive"><table class="table table-dark table-sm" style="font-size:0.85rem;"><thead><tr><th>Ürün</th><th>Eski Fiyat</th><th>Yeni Fiyat</th><th>Durum</th></tr></thead><tbody>';
+            let count = 0;
+
+            const processItems = (items) => {
+                items.forEach(item => {
+                    const name = item.name?.tr || '';
+                    const isExcluded = excludes.some(ex => name.toLowerCase().includes(ex));
+                    const displayNew = isExcluded ? item.price : newPrice;
+                    const changed = !isExcluded && item.price !== newPrice;
+                    html += `<tr class="${changed ? '' : 'opacity-50'}">
+                        <td>${name}</td>
+                        <td>${item.price}₺</td>
+                        <td class="text-warning fw-bold">${displayNew}₺</td>
+                        <td>${isExcluded ? '<span class="badge bg-secondary">İstisna</span>' : (changed ? '<span class="badge bg-success">Değişecek</span>' : '<span class="badge bg-secondary">Aynı</span>')}</td>
+                    </tr>`;
+                    count++;
+                });
+            };
+
+            const processCategory = (cat) => {
+                if (cat.items) processItems(cat.items);
+                if (cat.subcategories) cat.subcategories.forEach(sub => processItems(sub.items));
+            };
+
+            if (catKey === 'ALL') {
+                Object.values(currentMenu).forEach(cat => processCategory(cat));
+            } else {
+                processCategory(currentMenu[catKey]);
+            }
+
+            html += `</tbody></table></div><p class="text-muted small">${count} ürün önizleniyor.</p>`;
+            preview.innerHTML = html;
+        }
+
+        function applyBulkPrice() {
+            const catKey = document.getElementById('bulkCatSelect').value;
+            const newPrice = parseInt(document.getElementById('bulkPrice').value);
+            const excludeRaw = document.getElementById('bulkExclude').value;
+            const excludes = excludeRaw.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+
+            if (!newPrice || newPrice <= 0) return alert('Geçerli bir fiyat girin.');
+
+            const updateItems = (items) => {
+                items.forEach(item => {
+                    const name = item.name?.tr || '';
+                    const isExcluded = excludes.some(ex => name.toLowerCase().includes(ex));
+                    if (!isExcluded) item.price = newPrice;
+                });
+            };
+
+            const updateCategory = (cat) => {
+                if (cat.items) updateItems(cat.items);
+                if (cat.subcategories) cat.subcategories.forEach(sub => updateItems(sub.items));
+            };
+
+            if (catKey === 'ALL') {
+                Object.values(currentMenu).forEach(cat => updateCategory(cat));
+            } else {
+                updateCategory(currentMenu[catKey]);
+            }
+
+            saveMenuData(currentMenu);
+            renderMenu();
+            renderBulkPreview();
+            showToast(`✅ Fiyatlar güncellendi! (${catKey === 'ALL' ? 'Tüm kategoriler' : currentMenu[catKey]?.name?.tr})`);
+        }
+
+        // Patch switchTab to also init bulk price tab when opened
+        const _switchTabOrig = switchTab;
+        switchTab = function(tabName) {
+            _switchTabOrig(tabName);
+            if (tabName === 'prices') initBulkPriceTab();
+        };
 
         function autoFillTranslations() {
             const trName = document.getElementById('pName_tr').value;

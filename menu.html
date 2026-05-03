@@ -514,7 +514,11 @@
             }
         }
 
-        window.addEventListener('languageChanged', renderMenu);
+        // languageChanged: menüyü sıfırdan render etme, sadece dil metinlerini güncelle
+        window.addEventListener('languageChanged', function() {
+            // Tüm menüyü yeniden render et ama aynı localStorage verisini kullan
+            renderMenu();
+        });
         document.addEventListener('DOMContentLoaded', renderMenu);
 
         function shareMenuOnWhatsApp() {
