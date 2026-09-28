@@ -4,6 +4,7 @@
  */
 
 const DEFAULT_LANG = 'tr';
+const MENU_VERSION = '20260928';
 
 const menuData = {
     starters: {
@@ -562,22 +563,28 @@ function getCurrentLang() { return localStorage.getItem('muhabbetLang') || DEFAU
 function t_obj(obj) { if (!obj) return ''; if (typeof obj === 'string') return obj; const lang = getCurrentLang(); return obj[lang] || obj[DEFAULT_LANG] || ''; }
 function getMenuData() {
     try {
+        const storedVersion = localStorage.getItem('muhabbetMenuVersion');
         const stored = localStorage.getItem('muhabbetMenu');
-        if (stored) {
+        if (stored && storedVersion === MENU_VERSION) {
             const parsed = JSON.parse(stored);
             if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
                 return parsed;
             }
+        } else if (storedVersion !== MENU_VERSION) {
+            // Yeni versiyon var, eski cache'i temizle
+            localStorage.removeItem('muhabbetMenu');
+            localStorage.removeItem('muhabbetMenuVersion');
         }
     } catch(e) {
         console.warn('[Menu] localStorage okuma hatası, varsayılan veri kullanılıyor:', e);
-        try { localStorage.removeItem('muhabbetMenu'); } catch(_) {}
+        try { localStorage.removeItem('muhabbetMenu'); localStorage.removeItem('muhabbetMenuVersion'); } catch(_) {}
     }
     return menuData;
 }
 function saveMenuData(data) {
     try {
         localStorage.setItem('muhabbetMenu', JSON.stringify(data));
+        localStorage.setItem('muhabbetMenuVersion', MENU_VERSION);
     } catch(e) {
         console.error('[Menu] Kaydetme hatası (localStorage dolu olabilir):', e);
         alert('⚠️ Menü kaydedilemedi! Tarayıcı deposu dolu olabilir. Lütfen tarayıcı önbelleğini temizleyin.');
