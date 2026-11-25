@@ -71,7 +71,7 @@ const MAINTENANCE_MODE = true;
         <p class="mo-msg">
             Bu siteye şu an ulaşılamıyor.
         </p>
-        <p class="mo-sub">muhabbetocakbasi.com</p>
+
     `;
 
     function show() { document.body.appendChild(overlay); }
