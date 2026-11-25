@@ -1,105 +1,79 @@
 /**
- * Muhabbet Ocakbaşı - Bakım/Güncelleniyor Overlay
- * 
- * AÇMAK İÇİN:  MAINTENANCE_MODE = true  yapın ve push edin
- * KAPATMAK İÇİN: MAINTENANCE_MODE = false yapın ve push edin
+ * Muhabbet Ocakbaşı - Site Kapalı
+ * Geri açmak için: MAINTENANCE_MODE = false yapıp push edin.
  */
 
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 (function () {
     if (!MAINTENANCE_MODE) return;
 
-    // Stil
     const style = document.createElement('style');
     style.textContent = `
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         #maintenance-overlay {
             position: fixed;
             inset: 0;
             z-index: 999999;
-            background: #1a0a00;
+            background: #0f0600;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 28px;
+            gap: 24px;
             font-family: 'Playfair Display', Georgia, serif;
         }
         #maintenance-overlay .mo-logo {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #c8964a;
-            opacity: 0.9;
+            opacity: 0.7;
+            filter: grayscale(40%);
         }
         #maintenance-overlay .mo-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #c8964a;
             letter-spacing: 2px;
             text-align: center;
-            margin: 0;
         }
-        #maintenance-overlay .mo-subtitle {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            color: #e8d5b0;
-            text-align: center;
-            margin: 0;
-            line-height: 1.6;
-        }
-        #maintenance-overlay .mo-spinner {
-            width: 44px;
-            height: 44px;
-            border: 3px solid rgba(200,150,74,0.2);
-            border-top-color: #c8964a;
-            border-radius: 50%;
-            animation: mo-spin 0.9s linear infinite;
-        }
-        #maintenance-overlay .mo-dots span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            margin: 0 4px;
+        #maintenance-overlay .mo-line {
+            width: 60px;
+            height: 1px;
             background: #c8964a;
-            border-radius: 50%;
-            animation: mo-bounce 1.4s ease-in-out infinite;
+            opacity: 0.4;
         }
-        #maintenance-overlay .mo-dots span:nth-child(2) { animation-delay: 0.2s; }
-        #maintenance-overlay .mo-dots span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes mo-spin {
-            to { transform: rotate(360deg); }
+        #maintenance-overlay .mo-msg {
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 1.05rem;
+            color: #d4b896;
+            text-align: center;
+            line-height: 1.8;
         }
-        @keyframes mo-bounce {
-            0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
-            40%            { transform: translateY(-10px); opacity: 1; }
+        #maintenance-overlay .mo-sub {
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 0.82rem;
+            color: #7a6248;
+            text-align: center;
+            margin-top: 4px;
         }
     `;
     document.head.appendChild(style);
 
-    // Overlay HTML
     const overlay = document.createElement('div');
     overlay.id = 'maintenance-overlay';
     overlay.innerHTML = `
         <img class="mo-logo" src="images/logo.svg" alt="Muhabbet Ocakbaşı" onerror="this.style.display='none'">
         <p class="mo-title">Muhabbet Ocakbaşı</p>
-        <div class="mo-spinner"></div>
-        <p class="mo-subtitle">
-            Sitemiz şu anda güncelleniyor.<br>
-            Kısa süre içinde tekrar hizmetinizdeyiz. 🔥
+        <div class="mo-line"></div>
+        <p class="mo-msg">
+            Bu siteye şu an ulaşılamıyor.
         </p>
-        <div class="mo-dots">
-            <span></span><span></span><span></span>
-        </div>
+        <p class="mo-sub">muhabbetocakbasi.com</p>
     `;
 
-    // DOM hazır olunca ekle
-    if (document.body) {
-        document.body.appendChild(overlay);
-    } else {
-        document.addEventListener('DOMContentLoaded', function () {
-            document.body.appendChild(overlay);
-        });
-    }
+    function show() { document.body.appendChild(overlay); }
+    document.body ? show() : document.addEventListener('DOMContentLoaded', show);
 })();
